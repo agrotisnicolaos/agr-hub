@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Docs — agr·hub</title>
+<meta name="description" content="Documentation for the agr-launchpad base and everything built on it." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/app.css" />
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="index.html" aria-label="agr-hub home">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__txt">agr<span class="brand__dot">·</span>hub</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="index.html#launchpad">Launchpad</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#packs">Packs</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="docs.html" aria-current="page">Docs</a>
+      <a class="nav__cta" href="https://github.com/agrotisnicolaos/agr-launchpad" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HEADER -->
+  <section class="dochead" id="top">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="dochead__in">
+      <p class="eyebrow">Documentation</p>
+      <h1>Docs</h1>
+      <p class="lede">
+        Guides and references for the launchpad and everything built on it. This library grows as I
+        add packs, skills, and projects — start with the launchpad.
+      </p>
+    </div>
+    <div class="meander" aria-hidden="true"></div>
+  </section>
+
+  <!-- LAUNCHPAD DOCS -->
+  <section class="section" id="launchpad">
+    <div class="section__in">
+      <header class="section__head">
+        <p class="kicker"><span class="kicker__bar"></span>The base</p>
+        <h2 class="h2">agr-launchpad</h2>
+        <p class="lead">
+          The launchpad is a curated foundation of the best general-purpose plugins, MCP servers,
+          skills, and agents — assembled so Claude can think, design, build, review, and remember.
+          The onboarding guide is the complete, friendly walkthrough.
+        </p>
+      </header>
+
+      <div class="lp-note">
+        <p>
+          <strong>Onboarding guide.</strong> Everything in plain English — prerequisites, the
+          trust-and-approve setup, what each plugin and MCP server does, how to install them,
+          the packs system, gsd, markitdown, and troubleshooting.
+        </p>
+        <a class="btn btn--primary lp-deepdive" href="https://agrotisnicolaos.github.io/agr-launchpad/docs/onboarding.html" target="_blank" rel="noopener">Open the onboarding guide →</a>
+      </div>
+
+      <div class="grid doc-links">
+        <a class="card card--link" href="https://github.com/agrotisnicolaos/agr-launchpad#readme" target="_blank" rel="noopener">
+          <div class="card__top"><span class="card__marker">Reference</span></div>
+          <h3 class="card__name">README &amp; quickstart</h3>
+          <p class="card__desc">The repo's own README — what's inside, the quickstart, and the plugin/MCP/pack overview.</p>
+          <span class="card__link">View on GitHub ↗</span>
+        </a>
+        <a class="card card--link" href="https://github.com/agrotisnicolaos/agr-launchpad/blob/main/packs/README.md" target="_blank" rel="noopener">
+          <div class="card__top"><span class="card__marker">Guide</span></div>
+          <h3 class="card__name">Building a pack</h3>
+          <p class="card__desc">How the packs system works and how to author your own — the anatomy and conventions.</p>
+          <span class="card__link">View on GitHub ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MORE DOCS -->
+  <section class="section" id="more">
+    <div class="section__in">
+      <header class="section__head">
+        <p class="kicker"><span class="kicker__bar"></span>Growing</p>
+        <h2 class="h2">More documentation</h2>
+        <p class="lead">
+          As packs, skills, and projects are released, their guides land here.
+        </p>
+      </header>
+      <div class="grid">
+        <article class="card doc-soon">
+          <div class="card__top"><span class="card__marker">Packs</span><span class="badge badge--private">soon</span></div>
+          <h3 class="card__name">Pack guides</h3>
+          <p class="card__desc">Per-pack documentation — what each pack adds and how to use it.</p>
+        </article>
+        <article class="card doc-soon">
+          <div class="card__top"><span class="card__marker">Skills</span><span class="badge badge--private">soon</span></div>
+          <h3 class="card__name">Skill references</h3>
+          <p class="card__desc">Deep references for individual skills as they're published.</p>
+        </article>
+        <article class="card doc-soon">
+          <div class="card__top"><span class="card__marker">Projects</span><span class="badge badge--private">soon</span></div>
+          <h3 class="card__name">Project write-ups</h3>
+          <p class="card__desc">What each project does, how it's built, and how to run it.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__brand">
+      <span class="brand__txt brand__txt--lg">agr<span class="brand__dot">·</span>hub</span>
+      <p>A launchpad for building with Claude Code.</p>
+    </div>
+    <nav class="foot__links" aria-label="Footer">
+      <a href="index.html#launchpad">Launchpad</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#packs">Packs</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="docs.html">Docs</a>
+      <a href="index.html#about">About</a>
+      <a href="https://github.com/agrotisnicolaos" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </div>
+  <p class="foot__copy">© <span id="year"></span> Nicolas Agrotis</p>
+</footer>
+
+<script src="data/catalog.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

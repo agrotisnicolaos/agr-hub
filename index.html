@@ -25,6 +25,7 @@
       <a href="#skills">Skills</a>
       <a href="#packs">Packs</a>
       <a href="#projects">Projects</a>
+      <a href="docs.html">Docs</a>
       <a class="nav__cta" href="https://github.com/agrotisnicolaos/agr-launchpad" target="_blank" rel="noopener">GitHub ↗</a>
     </nav>
   </div>
@@ -54,35 +55,117 @@
 
   <!-- LAUNCHPAD -->
   <section class="section launchpad" id="launchpad">
-    <div class="section__in split">
-      <div class="split__lead">
-        <p class="kicker"><span class="kicker__bar"></span>The base</p>
-        <h2 class="h2">agr-launchpad</h2>
+    <div class="section__in">
+      <div class="split">
+        <div class="split__lead">
+          <p class="kicker"><span class="kicker__bar"></span>The base</p>
+          <h2 class="h2">agr-launchpad</h2>
+          <p class="lead">
+            Instead of starting every project from an empty folder, you start from here — a curated,
+            battle-tested foundation that makes Claude noticeably more capable and disciplined.
+            It is the <em>starting place</em> for anything you want to build.
+          </p>
+          <p class="lead muted">
+            Clone it once. Trust the folder. Approve a few prompts. Then just describe what you want
+            to make. When you start a particular kind of project, layer on a pack.
+          </p>
+        </div>
+        <aside class="panel" aria-label="agr-launchpad details">
+          <div class="panel__head">
+            <span class="panel__name">agr-launchpad</span>
+            <span class="badge badge--public">public</span>
+          </div>
+          <ul class="panel__list" id="lp-highlights"></ul>
+          <div class="panel__actions">
+            <a class="btn btn--primary btn--sm" id="lp-zip" href="#">Download ZIP</a>
+            <a class="btn btn--line btn--sm" id="lp-repo" href="#" target="_blank" rel="noopener">View on GitHub ↗</a>
+          </div>
+          <button class="clone" id="lp-clone" type="button" data-clip="">
+            <code id="lp-clone-cmd"></code>
+            <span class="clone__hint">click to copy</span>
+          </button>
+        </aside>
+      </div>
+
+      <!-- why these pieces / credit -->
+      <div class="lp-why">
+        <h3 class="lp-h3">Why these pieces, put together this way</h3>
         <p class="lead">
-          Instead of starting every project from an empty folder, you start from here — a curated,
-          battle-tested foundation that makes Claude noticeably more capable and disciplined.
-          It is the <em>starting place</em> for anything you want to build.
-        </p>
-        <p class="lead muted">
-          Clone it once. Trust the folder. Approve a few prompts. Then just describe what you want
-          to make. When you start a particular kind of project, layer on a pack.
+          None of these tools are mine. Each is the best I've found at one job, made by people who've
+          thought hard about it — <strong>Anthropic</strong>, <strong>Jesse Vincent</strong>,
+          <strong>Mert Köseoğlu</strong>, <strong>Alex Newman</strong>, <strong>Upstash</strong>, and
+          <strong>Datalayer</strong>. What the launchpad adds is <em>curation and wiring</em>: I chose
+          tools that are open, proven, and composable, then assembled them to cover the whole arc of
+          building — <span class="lp-arc">think → design → build → review → remember</span> — so they
+          cooperate instead of collide.
         </p>
       </div>
-      <aside class="panel" aria-label="agr-launchpad details">
-        <div class="panel__head">
-          <span class="panel__name">agr-launchpad</span>
-          <span class="badge badge--public">public</span>
-        </div>
-        <ul class="panel__list" id="lp-highlights"></ul>
-        <div class="panel__actions">
-          <a class="btn btn--primary btn--sm" id="lp-zip" href="#">Download ZIP</a>
-          <a class="btn btn--line btn--sm" id="lp-repo" href="#" target="_blank" rel="noopener">View on GitHub ↗</a>
-        </div>
-        <button class="clone" id="lp-clone" type="button" data-clip="">
-          <code id="lp-clone-cmd"></code>
-          <span class="clone__hint">click to copy</span>
-        </button>
-      </aside>
+
+      <!-- the pieces -->
+      <h3 class="lp-h3 lp-h3--mt">The pieces of the puzzle</h3>
+      <p class="lp-group-label">Plugins</p>
+      <div class="grid lp-pieces">
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Workflow engine</span><span class="piece__by">Jesse Vincent</span></div>
+          <h4 class="piece__name">superpowers</h4>
+          <p class="card__desc">Disciplined workflows — brainstorm before coding, write a plan, test first, debug methodically, verify before “done.” The backbone that keeps every build rigorous.</p>
+        </article>
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Authoring</span><span class="piece__by">Anthropic</span></div>
+          <h4 class="piece__name">skill-creator</h4>
+          <p class="card__desc">Mint your own skills. Repeating a task? It scaffolds and tests a reusable skill so Claude does it your way, every time.</p>
+        </article>
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Interface</span><span class="piece__by">Anthropic</span></div>
+          <h4 class="piece__name">frontend-design</h4>
+          <p class="card__desc">Distinctive, production-grade UI that escapes the generic “AI look” — so what you ship actually looks designed.</p>
+        </article>
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Quality</span><span class="piece__by">Anthropic</span></div>
+          <h4 class="piece__name">code-review</h4>
+          <p class="card__desc">Reviews your changes for bugs and cleanups; <code>/code-review ultra</code> runs a deep multi-agent pass in the cloud before you merge.</p>
+        </article>
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Focus</span><span class="piece__by">Mert Köseoğlu</span></div>
+          <h4 class="piece__name">context-mode</h4>
+          <p class="card__desc">Keeps large tool output out of the conversation, so Claude stays fast and sharp through long sessions.</p>
+        </article>
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Memory</span><span class="piece__by">Alex Newman</span></div>
+          <h4 class="piece__name">claude-mem</h4>
+          <p class="card__desc">Persistent memory across sessions — Claude remembers your project, so you never re-explain it.</p>
+        </article>
+      </div>
+
+      <p class="lp-group-label">Live tools <span class="lp-group-label__sub">(MCP servers)</span></p>
+      <div class="grid lp-pieces">
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Live docs</span><span class="piece__by">Upstash</span></div>
+          <h4 class="piece__name">context7</h4>
+          <p class="card__desc">Pulls current docs for any library, so Claude codes against today’s API — not stale memory.</p>
+        </article>
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Your repos</span><span class="piece__by">Anthropic · MCP</span></div>
+          <h4 class="piece__name">GitHub</h4>
+          <p class="card__desc">Connects your repos, issues, and pull requests, so Claude works inside your real GitHub flow.</p>
+        </article>
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Notebooks</span><span class="piece__by">Datalayer</span></div>
+          <h4 class="piece__name">jupyter</h4>
+          <p class="card__desc">A live notebook kernel — Claude runs and edits <code>.ipynb</code> cells in real time.</p>
+        </article>
+      </div>
+
+      <!-- note + deep dive -->
+      <div class="lp-note">
+        <p>
+          <strong>Simple by design.</strong> The base stays deliberately small so it's yours to shape —
+          swap pieces, add your own skills, tune the rulebook. And it's built to grow: every pack and
+          skill under development here in <strong>agr·hub</strong> is made to drop straight onto this
+          launchpad.
+        </p>
+        <a class="btn btn--primary lp-deepdive" href="docs.html#launchpad">Deep dive into the launchpad →</a>
+      </div>
     </div>
   </section>
 
@@ -154,6 +237,7 @@
       <a href="#skills">Skills</a>
       <a href="#packs">Packs</a>
       <a href="#projects">Projects</a>
+      <a href="docs.html">Docs</a>
       <a href="#about">About</a>
       <a href="https://github.com/agrotisnicolaos" target="_blank" rel="noopener">GitHub ↗</a>
     </nav>
