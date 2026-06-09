@@ -247,6 +247,11 @@ code {
   transition: transform .18s ease, box-shadow .25s ease, border-color .25s ease;
 }
 .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--limestone); }
+.card--link { color: inherit; text-decoration: none; cursor: pointer; }
+.card--link:hover { border-color: var(--sea); }
+.card__link { margin-top: auto; padding-top: 6px; color: var(--aegean); font-weight: 600; font-size: 14px; }
+.card--link:hover .card__link { color: var(--terracotta); }
+.card--link:hover .card__name { color: var(--aegean); }
 .card__top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
 .card__marker {
   font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;

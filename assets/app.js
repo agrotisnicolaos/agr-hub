@@ -94,20 +94,17 @@
   }
 
   function skillCard(s) {
-    var card = el("article", "card");
+    var href = s.url || s.repoUrl;
+    // the whole card is a link straight to this skill's SKILL.md
+    var card = el(href ? "a" : "article", "card" + (href ? " card--link" : ""));
+    if (href) { card.href = href; card.target = "_blank"; card.rel = "noopener"; }
     var top = el("div", "card__top");
     top.appendChild(el("span", "card__marker", esc(s.marker || "Skill")));
     if (s.home) top.appendChild(el("span", "badge badge--ships", "in " + esc(s.home)));
     card.appendChild(top);
     card.appendChild(el("h3", "card__name", "/" + esc(s.name)));
     card.appendChild(el("p", "card__desc", esc(s.description)));
-    if (s.repoUrl) {
-      var actions = el("div", "card__actions");
-      var v = el("a", "btn btn--line btn--sm", "View ↗");
-      v.href = s.repoUrl; v.target = "_blank"; v.rel = "noopener";
-      actions.appendChild(v);
-      card.appendChild(actions);
-    }
+    if (href) card.appendChild(el("span", "card__link", "View skill ↗"));
     return card;
   }
 

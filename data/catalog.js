@@ -34,14 +34,15 @@ window.AGR_CATALOG = {
 
   // Individual skills. Seeded with the universal skills that ship in agr-launchpad;
   // add your own as you build & share them.
+  // `url` deep-links to the skill's own SKILL.md so a click lands on that exact skill.
   skills: [
-    { name: "grill-me", marker: "Workflow", description: "Interviews you relentlessly about a plan or design until every decision is resolved.", home: "agr-launchpad", repoUrl: "https://github.com/agrotisnicolaos/agr-launchpad" },
-    { name: "coding-standards", marker: "Foundation", description: "Baseline conventions for clean, readable, consistent code.", home: "agr-launchpad", repoUrl: "https://github.com/agrotisnicolaos/agr-launchpad" },
-    { name: "error-handling", marker: "Foundation", description: "Patterns for handling failures properly instead of hiding them.", home: "agr-launchpad", repoUrl: "https://github.com/agrotisnicolaos/agr-launchpad" },
-    { name: "html", marker: "Craft", description: "Produces polished, single-file HTML pages with real design.", home: "agr-launchpad", repoUrl: "https://github.com/agrotisnicolaos/agr-launchpad" },
-    { name: "dashboard-builder", marker: "Craft", description: "Spins up quick, local dashboards from your data.", home: "agr-launchpad", repoUrl: "https://github.com/agrotisnicolaos/agr-launchpad" },
-    { name: "code-tour", marker: "Foundation", description: "Walks you through an unfamiliar codebase, section by section.", home: "agr-launchpad", repoUrl: "https://github.com/agrotisnicolaos/agr-launchpad" },
-    { name: "skill-stocktake", marker: "Meta", description: "Audits your installed skills and flags gaps or drift.", home: "agr-launchpad", repoUrl: "https://github.com/agrotisnicolaos/agr-launchpad" },
+    { name: "grill-me", marker: "Workflow", description: "Interviews you relentlessly about a plan or design until every decision is resolved.", home: "agr-launchpad", url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/grill-me/SKILL.md" },
+    { name: "coding-standards", marker: "Foundation", description: "Baseline conventions for clean, readable, consistent code.", home: "agr-launchpad", url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/coding-standards/SKILL.md" },
+    { name: "error-handling", marker: "Foundation", description: "Patterns for handling failures properly instead of hiding them.", home: "agr-launchpad", url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/error-handling/SKILL.md" },
+    { name: "html", marker: "Craft", description: "Produces polished, single-file HTML pages with real design.", home: "agr-launchpad", url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/html/SKILL.md" },
+    { name: "dashboard-builder", marker: "Craft", description: "Spins up quick, local dashboards from your data.", home: "agr-launchpad", url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/dashboard-builder/SKILL.md" },
+    { name: "code-tour", marker: "Foundation", description: "Walks you through an unfamiliar codebase, section by section.", home: "agr-launchpad", url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/code-tour/SKILL.md" },
+    { name: "skill-stocktake", marker: "Meta", description: "Audits your installed skills and flags gaps or drift.", home: "agr-launchpad", url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/skill-stocktake/SKILL.md" },
   ],
 
   // Project-specific packs (skills/agents/tools) installed via /plugin.
