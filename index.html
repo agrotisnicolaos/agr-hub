@@ -22,6 +22,7 @@
     </a>
     <nav class="nav__links" aria-label="Primary">
       <a href="#launchpad">Launchpad</a>
+      <a href="#skills">Skills</a>
       <a href="#packs">Packs</a>
       <a href="#projects">Projects</a>
       <a class="nav__cta" href="https://github.com/agrotisnicolaos/agr-launchpad" target="_blank" rel="noopener">GitHub ↗</a>
@@ -45,7 +46,7 @@
       </p>
       <div class="hero__cta reveal">
         <a class="btn btn--primary" href="#launchpad">Get the launchpad</a>
-        <a class="btn btn--ghost" href="#packs">Browse packs</a>
+        <a class="btn btn--ghost" href="#skills">Explore the catalog</a>
       </div>
     </div>
     <div class="meander" aria-hidden="true"></div>
@@ -85,6 +86,21 @@
     </div>
   </section>
 
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <div class="section__in">
+      <header class="section__head">
+        <p class="kicker"><span class="kicker__bar"></span>The abilities</p>
+        <h2 class="h2">Skills</h2>
+        <p class="lead">
+          Focused abilities Claude can call on — invoked with a <code>/slash</code> command. These ship
+          inside the launchpad; more will arrive here as I build and share them.
+        </p>
+      </header>
+      <div class="grid" id="skills-grid"><!-- rendered from data/catalog.js --></div>
+    </div>
+  </section>
+
   <!-- PACKS -->
   <section class="section packs" id="packs">
     <div class="section__in">
@@ -116,6 +132,15 @@
     </div>
   </section>
 
+  <!-- ABOUT -->
+  <section class="section about" id="about">
+    <div class="section__in about__in">
+      <span class="about__mark" aria-hidden="true"></span>
+      <p class="kicker kicker--center"><span class="kicker__bar"></span>About<span class="kicker__bar"></span></p>
+      <p class="about__line">Built and maintained by <strong>Nicolas Agrotis</strong>.</p>
+    </div>
+  </section>
+
 </main>
 
 <footer class="foot">
@@ -126,11 +151,12 @@
     </div>
     <nav class="foot__links" aria-label="Footer">
       <a href="#launchpad">Launchpad</a>
+      <a href="#skills">Skills</a>
       <a href="#packs">Packs</a>
       <a href="#projects">Projects</a>
+      <a href="#about">About</a>
       <a href="https://github.com/agrotisnicolaos" target="_blank" rel="noopener">GitHub ↗</a>
     </nav>
-    <p class="foot__soon">More soon — about &amp; vision, project write-ups, media, and a way to react and discuss.</p>
   </div>
   <p class="foot__copy">© <span id="year"></span> Nicolas Agrotis</p>
 </footer>

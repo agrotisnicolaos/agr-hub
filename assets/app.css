@@ -1,19 +1,23 @@
 /* ============================================================
    agr·hub — Aegean / Cycladic editorial
-   Palette: Aegean #1B4F9C · Sea #5BA4D4 · Whitewash #F8F6F1
-            Limestone #E8D5A3 · Ochre #C4892A · Terracotta #A84E35
-            Cypress #3A5C3A
+   Palette: Aegean #1B4F9C · Sky #2a63b8 · Sea #5BA4D4 · Whitewash #F8F6F1
+            Limestone #E8D5A3 · Orange #EE9A52 (CTA) · Terracotta #A84E35
+            Footer light-blue #dceaf6
    ============================================================ */
 :root {
   --aegean:    #1B4F9C;
   --aegean-dk: #143b76;
   --sea:       #5BA4D4;
+  --sky:       #2a63b8;        /* lighter blue for the hero base */
   --whitewash: #F8F6F1;
   --limestone: #E8D5A3;
   --ochre:     #C4892A;
   --ochre-dk:  #a8721f;
+  --orange:    #EE9A52;        /* friendly, light CTA orange */
+  --orange-dk: #e2873a;
   --terracotta:#A84E35;
-  --cypress:   #3A5C3A;
+  --footer-bg: #dceaf6;        /* light blue footer */
+  --footer-ln: #c4dcef;
 
   --ink:   #221c14;       /* warm near-black text */
   --ink-2: #5d5648;       /* muted warm grey */
@@ -69,7 +73,8 @@ code {
   color: var(--terracotta); font-weight: 600; display: flex; align-items: center; gap: 12px;
   margin: 0 0 14px;
 }
-.kicker__bar { width: 34px; height: 2px; background: var(--ochre); display: inline-block; }
+.kicker__bar { width: 34px; height: 2px; background: var(--orange); display: inline-block; }
+.kicker--center { justify-content: center; }
 
 .h2 {
   font-family: var(--serif); font-weight: 700;
@@ -97,7 +102,7 @@ code {
   box-shadow: 0 0 0 3px rgba(248,246,241,.18);
 }
 .brand__txt { font-family: var(--serif); font-weight: 600; font-size: 22px; letter-spacing: -.01em; }
-.brand__txt--lg { font-size: 30px; color: var(--whitewash); }
+.brand__txt--lg { font-size: 30px; color: var(--aegean); }
 .brand__dot { color: var(--ochre); }
 .nav__links { display: flex; align-items: center; gap: 28px; }
 .nav__links a { color: rgba(248,246,241,.86); font-weight: 500; font-size: 15px; }
@@ -121,7 +126,7 @@ code {
 .hero {
   position: relative; overflow: hidden;
   background:
-    linear-gradient(160deg, var(--aegean) 0%, var(--aegean-dk) 78%);
+    linear-gradient(165deg, var(--aegean) 0%, var(--sky) 100%);
   color: var(--whitewash);
   padding: clamp(150px, 22vh, 260px) 24px clamp(120px, 16vw, 200px);
 }
@@ -170,8 +175,8 @@ code {
   white-space: nowrap;
 }
 .btn--sm { padding: 10px 18px; font-size: 14.5px; }
-.btn--primary { background: var(--ochre); color: #2a1c08; box-shadow: 0 6px 18px rgba(196,137,42,.35); }
-.btn--primary:hover { background: var(--ochre-dk); color: #2a1c08; transform: translateY(-2px); }
+.btn--primary { background: var(--orange); color: #3a2208; box-shadow: 0 6px 18px rgba(238,154,82,.36); }
+.btn--primary:hover { background: var(--orange-dk); color: #3a2208; transform: translateY(-2px); }
 .btn--ghost { background: rgba(248,246,241,.08); color: var(--whitewash); border-color: rgba(248,246,241,.4); }
 .btn--ghost:hover { background: rgba(248,246,241,.16); color: #fff; transform: translateY(-2px); }
 .btn--line { background: transparent; color: var(--aegean); border-color: var(--line); }
@@ -185,9 +190,9 @@ code {
   background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
   padding: 26px; box-shadow: var(--shadow-md); position: relative;
 }
-.panel::before { /* limestone top seam */
+.panel::before { /* warm top seam */
   content: ""; position: absolute; left: 26px; right: 26px; top: 0; height: 3px;
-  background: linear-gradient(90deg, var(--ochre), var(--terracotta)); border-radius: 0 0 3px 3px;
+  background: linear-gradient(90deg, var(--orange), var(--terracotta)); border-radius: 0 0 3px 3px;
 }
 .panel__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
 .panel__name { font-family: var(--serif); font-weight: 600; font-size: 21px; }
@@ -209,10 +214,10 @@ code {
   padding: 11px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px;
   transition: background .2s ease, border-color .2s ease;
 }
-.clone:hover { background: #f6eedb; border-color: var(--ochre); }
+.clone:hover { background: #f6eedb; border-color: var(--orange); }
 .clone code { font-size: 13px; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .clone__hint { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); flex-shrink: 0; }
-.clone.copied .clone__hint { color: var(--cypress); }
+.clone.copied .clone__hint { color: var(--aegean); }
 .clone.copied .clone__hint::before { content: "✓ "; }
 
 /* ---------- badges ---------- */
@@ -220,13 +225,18 @@ code {
   font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
   padding: 4px 10px; border-radius: 999px;
 }
-.badge--public { background: rgba(58,92,58,.12); color: var(--cypress); }
+.badge--public { background: rgba(27,79,156,.1); color: var(--aegean); }
 .badge--private { background: rgba(93,86,72,.1); color: var(--ink-2); }
+.badge--ships { background: rgba(91,164,212,.18); color: #2f6f9e; }
 
-/* ---------- section tints ---------- */
-.packs { background:
-    linear-gradient(var(--whitewash), #f3eee2 60%, var(--whitewash));
-}
+/* ---------- section rhythm (all sections carry equal weight) ----------
+   A constrained hairline between sections, drawn at the top of each
+   section's inner column so the four sections read as equals. */
+.launchpad .section__in,
+#skills .section__in,
+.packs .section__in,
+.projects .section__in { border-top: 1px solid var(--line); padding-top: clamp(56px, 7vw, 96px); }
+.launchpad .section__in { border-top: none; padding-top: 0; }
 
 /* ---------- grids / cards ---------- */
 .grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
@@ -259,20 +269,30 @@ code {
 .empty p { color: var(--ink-2); margin: 0 auto; max-width: 46ch; }
 .empty code { background: #efe7d4; padding: 2px 7px; border-radius: 6px; font-size: .92em; }
 
-/* ---------- footer ---------- */
-.foot { background: var(--cypress); color: rgba(248,246,241,.86); }
-.foot__in {
-  max-width: var(--maxw); margin: 0 auto; padding: 64px 24px 28px;
-  display: grid; grid-template-columns: 1.4fr 1fr 1.4fr; gap: 32px; align-items: start;
+/* ---------- about ---------- */
+.about__in { text-align: center; max-width: 620px; }
+.about__mark {
+  width: 42px; height: 42px; border-radius: 50%; margin: 0 auto 20px; display: block;
+  background: radial-gradient(circle at 32% 30%, var(--orange) 0 42%, var(--terracotta) 44% 100%);
+  box-shadow: 0 0 0 5px rgba(238,154,82,.15);
 }
-.foot__brand p { margin: 10px 0 0; max-width: 30ch; font-size: 15px; }
-.foot__links { display: flex; flex-direction: column; gap: 10px; }
-.foot__links a { color: rgba(248,246,241,.86); font-weight: 500; }
-.foot__links a:hover { color: var(--limestone); }
-.foot__soon { font-size: 14.5px; color: rgba(248,246,241,.66); line-height: 1.6; margin: 0; }
+.about .kicker { margin-bottom: 16px; }
+.about__line { font-size: clamp(19px, 2.6vw, 26px); font-weight: 600; color: var(--ink); margin: 6px 0 0; }
+.about__line strong { color: var(--aegean); font-weight: 700; }
+
+/* ---------- footer ---------- */
+.foot { background: var(--footer-bg); color: var(--ink-2); }
+.foot__in {
+  max-width: var(--maxw); margin: 0 auto; padding: 52px 24px 26px;
+  display: grid; grid-template-columns: 1.6fr 1fr; gap: 28px; align-items: start;
+}
+.foot__brand p { margin: 10px 0 0; max-width: 34ch; font-size: 15px; color: var(--ink-2); }
+.foot__links { display: flex; flex-wrap: wrap; gap: 10px 22px; align-content: start; }
+.foot__links a { color: var(--aegean); font-weight: 600; }
+.foot__links a:hover { color: var(--terracotta); }
 .foot__copy {
-  max-width: var(--maxw); margin: 0 auto; padding: 20px 24px 40px;
-  border-top: 1px solid rgba(248,246,241,.14); font-size: 13.5px; color: rgba(248,246,241,.6);
+  max-width: var(--maxw); margin: 0 auto; padding: 18px 24px 40px;
+  border-top: 1px solid var(--footer-ln); font-size: 13.5px; color: var(--ink-2);
 }
 
 /* ---------- reveal animation ---------- */
@@ -290,7 +310,7 @@ code {
 /* ---------- responsive ---------- */
 @media (max-width: 860px) {
   .split { grid-template-columns: 1fr; }
-  .foot__in { grid-template-columns: 1fr; gap: 28px; }
+  .foot__in { grid-template-columns: 1fr; gap: 22px; }
 }
 @media (max-width: 600px) {
   body { font-size: 16px; }

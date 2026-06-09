@@ -93,6 +93,24 @@
     return card;
   }
 
+  function skillCard(s) {
+    var card = el("article", "card");
+    var top = el("div", "card__top");
+    top.appendChild(el("span", "card__marker", esc(s.marker || "Skill")));
+    if (s.home) top.appendChild(el("span", "badge badge--ships", "in " + esc(s.home)));
+    card.appendChild(top);
+    card.appendChild(el("h3", "card__name", "/" + esc(s.name)));
+    card.appendChild(el("p", "card__desc", esc(s.description)));
+    if (s.repoUrl) {
+      var actions = el("div", "card__actions");
+      var v = el("a", "btn btn--line btn--sm", "View ↗");
+      v.href = s.repoUrl; v.target = "_blank"; v.rel = "noopener";
+      actions.appendChild(v);
+      card.appendChild(actions);
+    }
+    return card;
+  }
+
   function projectCard(p) {
     var card = el("article", "card");
     var top = el("div", "card__top");
@@ -141,6 +159,12 @@
     }
     items.forEach(function (it) { grid.appendChild(builder(it)); });
   }
+
+  renderGrid("skills-grid", C.skills, skillCard, {
+    mark: "/",
+    title: "Skills, coming soon",
+    body: "Individual skills will be listed here as they're built and shared."
+  });
 
   renderGrid("packs-grid", C.packs, packCard, {
     mark: "⌁",
