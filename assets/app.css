@@ -97,9 +97,8 @@ code {
 }
 .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--whitewash); }
 .brand__mark {
-  width: 26px; height: 26px; border-radius: 50%;
-  background: radial-gradient(circle at 32% 30%, var(--ochre) 0 42%, var(--terracotta) 44% 100%);
-  box-shadow: 0 0 0 3px rgba(248,246,241,.18);
+  width: 26px; height: 26px; flex-shrink: 0; display: block;
+  filter: drop-shadow(0 1px 1.5px rgba(0,0,0,.2));
 }
 .brand__txt { font-family: var(--serif); font-weight: 600; font-size: 22px; letter-spacing: -.01em; }
 .brand__txt--lg { font-size: 30px; color: var(--aegean); }
@@ -120,7 +119,6 @@ code {
 .nav.scrolled .nav__links a:hover { color: var(--terracotta); }
 .nav.scrolled .nav__cta { border-color: var(--line); color: var(--aegean); }
 .nav.scrolled .nav__cta:hover { background: #efe7d4; }
-.nav.scrolled .brand__mark { box-shadow: 0 0 0 3px rgba(27,79,156,.10); }
 
 /* ---------- hero ---------- */
 .hero {
