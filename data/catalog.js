@@ -21,7 +21,7 @@ window.AGR_CATALOG = {
     description:
       "A batteries-included Claude Code starter kit: a lean universal core of the best general-purpose plugins, MCP servers, skills, and agents — plus a packs system for layering on project-specific power.",
     repoUrl: "https://github.com/agrotisnicolaos/agr-launchpad",
-    zipUrl: "https://github.com/agrotisnicolaos/agr-launchpad/archive/refs/heads/master.zip",
+    zipUrl: "https://github.com/agrotisnicolaos/agr-launchpad/archive/refs/heads/main.zip",
     highlights: [
       "superpowers · skill-creator · frontend-design",
       "code-review with ultra cloud review",

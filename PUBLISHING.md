@@ -90,8 +90,7 @@ A pack is a normal Claude Code **plugin**. Recommended repo name: `agr-pack-<nam
 3. Push. The card appears with Download ZIP / View / clone actions (public) or an "in dev" badge
    (private).
 
-> Tip: the `zipUrl` branch is `main` for most repos but `master` for agr-launchpad — match whatever
-> the repo's default branch is.
+> Tip: the `zipUrl` branch is usually `main` — match whatever the repo's default branch is.
 
 ## Future (not built yet)
 
