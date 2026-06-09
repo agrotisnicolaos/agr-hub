@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>agr·hub — build anything with Claude</title>
+<meta name="description" content="A launchpad for building with Claude Code — a batteries-included starter kit, a marketplace of project packs, and a showcase of projects." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/app.css" />
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="#top" aria-label="agr-hub home">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__txt">agr<span class="brand__dot">·</span>hub</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#launchpad">Launchpad</a>
+      <a href="#packs">Packs</a>
+      <a href="#projects">Projects</a>
+      <a class="nav__cta" href="https://github.com/agrotisnicolaos/agr-launchpad" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="hero__in">
+      <p class="eyebrow reveal">A launchpad for building with Claude Code</p>
+      <h1 class="hero__title reveal">
+        Build anything.<br /><em>Beautifully.</em>
+      </h1>
+      <p class="hero__lede reveal">
+        Start from a solid, versatile base. Add project-specific power when you need it.
+        One home for the launchpad, a marketplace of packs, and the things I build.
+      </p>
+      <div class="hero__cta reveal">
+        <a class="btn btn--primary" href="#launchpad">Get the launchpad</a>
+        <a class="btn btn--ghost" href="#packs">Browse packs</a>
+      </div>
+    </div>
+    <div class="meander" aria-hidden="true"></div>
+  </section>
+
+  <!-- LAUNCHPAD -->
+  <section class="section launchpad" id="launchpad">
+    <div class="section__in split">
+      <div class="split__lead">
+        <p class="kicker"><span class="kicker__bar"></span>The base</p>
+        <h2 class="h2">agr-launchpad</h2>
+        <p class="lead">
+          Instead of starting every project from an empty folder, you start from here — a curated,
+          battle-tested foundation that makes Claude noticeably more capable and disciplined.
+          It is the <em>starting place</em> for anything you want to build.
+        </p>
+        <p class="lead muted">
+          Clone it once. Trust the folder. Approve a few prompts. Then just describe what you want
+          to make. When you start a particular kind of project, layer on a pack.
+        </p>
+      </div>
+      <aside class="panel" aria-label="agr-launchpad details">
+        <div class="panel__head">
+          <span class="panel__name">agr-launchpad</span>
+          <span class="badge badge--public">public</span>
+        </div>
+        <ul class="panel__list" id="lp-highlights"></ul>
+        <div class="panel__actions">
+          <a class="btn btn--primary btn--sm" id="lp-zip" href="#">Download ZIP</a>
+          <a class="btn btn--line btn--sm" id="lp-repo" href="#" target="_blank" rel="noopener">View on GitHub ↗</a>
+        </div>
+        <button class="clone" id="lp-clone" type="button" data-clip="">
+          <code id="lp-clone-cmd"></code>
+          <span class="clone__hint">click to copy</span>
+        </button>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PACKS -->
+  <section class="section packs" id="packs">
+    <div class="section__in">
+      <header class="section__head">
+        <p class="kicker"><span class="kicker__bar"></span>The marketplace</p>
+        <h2 class="h2">Packs</h2>
+        <p class="lead">
+          Project-specific bundles of skills, agents, and tools that layer onto the base. Install one
+          with <code>/plugin</code> when you start that kind of project — the launchpad already knows
+          this marketplace.
+        </p>
+      </header>
+      <div class="grid" id="packs-grid"><!-- rendered from data/catalog.js --></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section projects" id="projects">
+    <div class="section__in">
+      <header class="section__head">
+        <p class="kicker"><span class="kicker__bar"></span>The work</p>
+        <h2 class="h2">Projects</h2>
+        <p class="lead">
+          Things I'm building — each with its own purpose, easy to explore, clone, or download.
+          More to come, with deeper write-ups along the way.
+        </p>
+      </header>
+      <div class="grid" id="projects-grid"><!-- rendered from data/catalog.js --></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__brand">
+      <span class="brand__txt brand__txt--lg">agr<span class="brand__dot">·</span>hub</span>
+      <p>A launchpad for building with Claude Code.</p>
+    </div>
+    <nav class="foot__links" aria-label="Footer">
+      <a href="#launchpad">Launchpad</a>
+      <a href="#packs">Packs</a>
+      <a href="#projects">Projects</a>
+      <a href="https://github.com/agrotisnicolaos" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+    <p class="foot__soon">More soon — about &amp; vision, project write-ups, media, and a way to react and discuss.</p>
+  </div>
+  <p class="foot__copy">© <span id="year"></span> Nicolas Agrotis</p>
+</footer>
+
+<script src="data/catalog.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "agr-hub",
+  "owner": {
+    "name": "Nicolas Agrotis",
+    "url": "https://github.com/agrotisnicolaos"
+  },
+  "metadata": {
+    "description": "Nicolas Agrotis' marketplace of Claude Code packs — project-specific bundles of skills, agents, and tools that layer on top of the agr-launchpad base.",
+    "version": "0.1.0"
+  },
+  "plugins": []
+}
