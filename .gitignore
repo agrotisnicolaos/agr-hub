@@ -1,3 +1,16 @@
 .DS_Store
 *.swp
 node_modules/
+
+# dev tooling (launchpad setup) — local to the dev worktree, never published to the site
+.claude/
+.mcp.json
+CLAUDE.md
+.vscode/
+.env
+.env.example
+
+# local state regenerated per machine
+.claude-mem/
+.jupyter-venv/
+.ipynb_checkpoints/
