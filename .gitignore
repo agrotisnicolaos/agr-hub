@@ -9,6 +9,10 @@ CLAUDE.md
 .vscode/
 .env
 .env.example
+Makefile
+scripts/
+packs/
+manifests/
 
 # local state regenerated per machine
 .claude-mem/
