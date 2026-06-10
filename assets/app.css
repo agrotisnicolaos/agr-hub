@@ -311,6 +311,36 @@ code {
   width: 100%; margin-top: 10px;
 }
 
+/* project cards — snapshot, highlights, doc links */
+.card--project { padding-top: 0; }
+.card__shot {
+  display: block; margin: 0 -25px 20px; overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  border-radius: var(--r) var(--r) 0 0;
+  background: #fbf6ea;
+}
+.card__shot img {
+  display: block; width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover;
+  object-position: top; transition: transform .4s ease;
+}
+.card__shot:hover img { transform: scale(1.025); }
+.card__points { list-style: none; margin: 0 0 18px; padding: 0; }
+.card__points li {
+  position: relative; padding: 5px 0 5px 22px; font-size: 14px; color: var(--ink);
+  border-bottom: 1px dashed var(--line);
+}
+.card__points li:last-child { border-bottom: 0; }
+.card__points li::before {
+  content: ""; position: absolute; left: 4px; top: 13px; width: 7px; height: 7px;
+  background: var(--sea); border-radius: 50%; box-shadow: 0 0 0 3px rgba(91,164,212,.18);
+}
+.card__doclinks { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 18px; }
+.card__doclink {
+  font-size: 13.5px; font-weight: 700; color: var(--aegean); text-decoration: none;
+  border-bottom: 1px solid transparent; transition: border-color .15s ease;
+}
+.card__doclink:hover { border-bottom-color: var(--aegean); }
+
 /* empty state */
 .empty {
   grid-column: 1 / -1; text-align: center; padding: 56px 24px;

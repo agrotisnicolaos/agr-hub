@@ -58,15 +58,42 @@ window.AGR_CATALOG = {
   packs: [],
 
   // Other projects — GitHub repos with their own purpose. Showcased here with
-  // an easy clone/download. (Future: media, upvotes, comments.)
-  // Example card shape:
+  // an easy clone/download. (Future: upvotes, comments.)
+  // Card shape (image, highlights, links are optional):
   //   {
   //     name: "my-project",
   //     marker: "Web app",
   //     description: "What it does, in one or two sentences.",
   //     visibility: "public",
+  //     image: "assets/projects/my-project.png",   // snapshot of the output
+  //     highlights: ["one-liner", "one-liner"],
+  //     links: [{ label: "Setup guide", url: "https://..." }],
   //     repoUrl: "https://github.com/agrotisnicolaos/my-project",
   //     zipUrl: "https://github.com/agrotisnicolaos/my-project/archive/refs/heads/main.zip"
   //   }
-  projects: [],
+  projects: [
+    {
+      name: "agr-informed",
+      marker: "AI automation",
+      description:
+        "Let AI keep up with AI — or any field. An automated intelligence briefing that reads your chosen YouTube channels every morning and delivers a 3-minute magazine-style report: stories clustered across sources, badged by what's novel and contrarian, filtered for what matters to you. A second-brain wiki compounds the findings across runs. Runs entirely on a paid Claude account — no API keys, no servers.",
+      visibility: "public",
+      image: "assets/projects/agr-informed.png",
+      imageAlt: "A daily agr-informed briefing: TL;DR panels and story-cluster tiles",
+      highlights: [
+        "Hours of video → a 3-minute morning brief",
+        "Cross-source clustering with timestamp deep-links",
+        "Personal relevance filter from a 5-question profile",
+        "Second-brain wiki that compounds across runs",
+        "Topic-agnostic: AI, science, finance — your channels decide",
+        "Beginner-proof: ZIP download + step-by-step guide",
+      ],
+      links: [
+        { label: "See an example briefing", url: "https://htmlpreview.github.io/?https://github.com/agrotisnicolaos/agr-informed/blob/main/examples/example-briefing.html" },
+        { label: "Complete setup guide", url: "https://github.com/agrotisnicolaos/agr-informed/blob/main/docs/GUIDE.md" },
+      ],
+      repoUrl: "https://github.com/agrotisnicolaos/agr-informed",
+      zipUrl: "https://github.com/agrotisnicolaos/agr-informed/archive/refs/heads/main.zip",
+    },
+  ],
 };

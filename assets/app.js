@@ -109,7 +109,18 @@
   }
 
   function projectCard(p) {
-    var card = el("article", "card");
+    var card = el("article", "card card--project");
+    if (p.image) {
+      var shot = el("a", "card__shot");
+      var img = document.createElement("img");
+      img.src = p.image;
+      img.alt = p.imageAlt || (p.name + " — example output");
+      img.loading = "lazy";
+      shot.appendChild(img);
+      var primary = (p.links && p.links[0] && p.links[0].url) || p.repoUrl;
+      if (primary) { shot.href = primary; shot.target = "_blank"; shot.rel = "noopener"; }
+      card.appendChild(shot);
+    }
     var top = el("div", "card__top");
     top.appendChild(el("span", "card__marker", esc(p.marker || "Project")));
     top.appendChild(el("span", "badge badge--" + (p.visibility === "public" ? "public" : "private"),
@@ -117,6 +128,20 @@
     card.appendChild(top);
     card.appendChild(el("h3", "card__name", esc(p.name)));
     card.appendChild(el("p", "card__desc", esc(p.description)));
+    if (p.highlights && p.highlights.length) {
+      var ul = el("ul", "card__points");
+      p.highlights.forEach(function (h) { ul.appendChild(el("li", null, esc(h))); });
+      card.appendChild(ul);
+    }
+    if (p.links && p.links.length) {
+      var lks = el("div", "card__doclinks");
+      p.links.forEach(function (l) {
+        var a = el("a", "card__doclink", esc(l.label) + " ↗");
+        a.href = l.url; a.target = "_blank"; a.rel = "noopener";
+        lks.appendChild(a);
+      });
+      card.appendChild(lks);
+    }
 
     if (p.visibility === "public") {
       var actions = el("div", "card__actions");
