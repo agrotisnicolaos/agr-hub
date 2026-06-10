@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/app.css?v=2" />
+<link rel="stylesheet" href="assets/app.css?v=3" />
 </head>
 <body>
 
@@ -25,12 +25,25 @@
       <span class="brand__txt">agr<span class="brand__dot">·</span>hub</span>
     </a>
     <nav class="nav__links" aria-label="Primary">
-      <a href="index.html#launchpad">Launchpad</a>
-      <a href="index.html#skills">Skills</a>
-      <a href="index.html#packs">Packs</a>
-      <a href="index.html#projects">Projects</a>
-      <a href="docs.html" aria-current="page">Docs</a>
-      <a class="nav__cta" href="https://github.com/agrotisnicolaos/agr-launchpad" target="_blank" rel="noopener">GitHub ↗</a>
+      <div class="nav__drop">
+        <a href="chat.html">Chat <span class="nav__caret" aria-hidden="true">▾</span></a>
+        <div class="nav__menu">
+          <a href="chat.html#skills">Skills</a>
+          <a href="chat.html#asset=how-to-use-skills">How-to guide</a>
+        </div>
+      </div>
+      <div class="nav__drop">
+        <a href="code.html">Code <span class="nav__caret" aria-hidden="true">▾</span></a>
+        <div class="nav__menu">
+          <a href="code.html#launchpad">Launchpad</a>
+          <a href="code.html#skills">Skills</a>
+          <a href="code.html#packs">Packs</a>
+          <a href="code.html#projects">Projects</a>
+          <a href="docs.html" aria-current="page">Docs</a>
+        </div>
+      </div>
+      <a href="index.html#about">About</a>
+      <a class="nav__cta" href="https://github.com/agrotisnicolaos" target="_blank" rel="noopener">GitHub ↗</a>
     </nav>
   </div>
 </header>
@@ -186,10 +199,8 @@
       <p>A launchpad for building with Claude Code.</p>
     </div>
     <nav class="foot__links" aria-label="Footer">
-      <a href="index.html#launchpad">Launchpad</a>
-      <a href="index.html#skills">Skills</a>
-      <a href="index.html#packs">Packs</a>
-      <a href="index.html#projects">Projects</a>
+      <a href="chat.html">Chat</a>
+      <a href="code.html">Code</a>
       <a href="docs.html">Docs</a>
       <a href="index.html#about">About</a>
       <a href="https://github.com/agrotisnicolaos" target="_blank" rel="noopener">GitHub ↗</a>

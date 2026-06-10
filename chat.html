@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chat — agr·hub</title>
+<meta name="description" content="Ready-made skills for Claude chat, explained in plain language. Download a skill, upload it to claude.ai, and Claude gains a new ability — no coding needed." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/app.css?v=3" />
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="index.html" aria-label="agr-hub home">
+      <svg class="brand__mark" viewBox="0 0 32 32" width="26" height="26" role="img" aria-hidden="true" focusable="false">
+        <path d="M16 9.6C17.6 5.7 21.6 4.2 24.9 5.2 24.1 9.2 20.1 11.2 16 9.6Z" fill="#54A85B"/>
+        <circle cx="15.1" cy="19.4" r="9.4" fill="#F2933E"/>
+        <path d="M9.3 16.7C10.2 13.8 12.5 11.8 15.4 11.6" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2.1" stroke-linecap="round"/>
+      </svg>
+      <span class="brand__txt">agr<span class="brand__dot">·</span>hub</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <div class="nav__drop">
+        <a href="chat.html">Chat <span class="nav__caret" aria-hidden="true">▾</span></a>
+        <div class="nav__menu">
+          <a href="#skills">Skills</a>
+          <a href="#asset=how-to-use-skills">How-to guide</a>
+        </div>
+      </div>
+      <div class="nav__drop">
+        <a href="code.html">Code <span class="nav__caret" aria-hidden="true">▾</span></a>
+        <div class="nav__menu">
+          <a href="code.html#launchpad">Launchpad</a>
+          <a href="code.html#skills">Skills</a>
+          <a href="code.html#packs">Packs</a>
+          <a href="code.html#projects">Projects</a>
+          <a href="docs.html">Docs</a>
+        </div>
+      </div>
+      <a href="index.html#about">About</a>
+      <a class="nav__cta" href="https://github.com/agrotisnicolaos" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero hero--sub" id="top">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="hero__in">
+      <p class="eyebrow reveal">For everyone who chats with Claude</p>
+      <h1 class="hero__title reveal">
+        New abilities for your Claude — <em>no coding needed.</em>
+      </h1>
+      <p class="hero__lede reveal">
+        Skills are small files that teach Claude new abilities and your preferences. Download one
+        below, upload it to claude.ai, and it just works. Never done this before? The
+        “Start here” card walks you through every step.
+      </p>
+      <div class="hero__cta reveal">
+        <a class="btn btn--primary" href="#asset=how-to-use-skills">Show me how to install →</a>
+        <a class="btn btn--ghost" href="#skills">Browse the skills</a>
+      </div>
+    </div>
+    <div class="meander" aria-hidden="true"></div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <div class="section__in">
+      <header class="section__head">
+        <p class="kicker"><span class="kicker__bar"></span>The abilities</p>
+        <h2 class="h2">Skills for Claude chat</h2>
+        <p class="lead">
+          Click any card to see what it is, why it's useful, what it pairs well with, and a real
+          example — then download it and upload it to claude.ai. Each card shows who made it,
+          with credit to where it came from.
+        </p>
+      </header>
+      <div class="grid" id="chat-skills-grid"><!-- rendered from data/catalog.js --></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__brand">
+      <span class="foot__logo">
+        <svg class="brand__mark" viewBox="0 0 32 32" width="30" height="30" role="img" aria-hidden="true" focusable="false">
+          <path d="M16 9.6C17.6 5.7 21.6 4.2 24.9 5.2 24.1 9.2 20.1 11.2 16 9.6Z" fill="#54A85B"/>
+          <circle cx="15.1" cy="19.4" r="9.4" fill="#F2933E"/>
+          <path d="M9.3 16.7C10.2 13.8 12.5 11.8 15.4 11.6" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2.1" stroke-linecap="round"/>
+        </svg>
+        <span class="brand__txt brand__txt--lg">agr<span class="brand__dot">·</span>hub</span>
+      </span>
+      <p>Advancements in AI, available to everyone.</p>
+    </div>
+    <nav class="foot__links" aria-label="Footer">
+      <a href="chat.html">Chat</a>
+      <a href="code.html">Code</a>
+      <a href="docs.html">Docs</a>
+      <a href="index.html#about">About</a>
+      <a href="https://github.com/agrotisnicolaos" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </div>
+  <p class="foot__copy">© <span id="year"></span> Nicolas Agrotis</p>
+</footer>
+
+<script src="data/catalog.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

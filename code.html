@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Code — agr·hub</title>
+<meta name="description" content="A launchpad for building with Claude Code — a batteries-included starter kit, individual skills, a marketplace of project packs, and a showcase of projects." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/app.css?v=3" />
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="index.html" aria-label="agr-hub home">
+      <svg class="brand__mark" viewBox="0 0 32 32" width="26" height="26" role="img" aria-hidden="true" focusable="false">
+        <path d="M16 9.6C17.6 5.7 21.6 4.2 24.9 5.2 24.1 9.2 20.1 11.2 16 9.6Z" fill="#54A85B"/>
+        <circle cx="15.1" cy="19.4" r="9.4" fill="#F2933E"/>
+        <path d="M9.3 16.7C10.2 13.8 12.5 11.8 15.4 11.6" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2.1" stroke-linecap="round"/>
+      </svg>
+      <span class="brand__txt">agr<span class="brand__dot">·</span>hub</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <div class="nav__drop">
+        <a href="chat.html">Chat <span class="nav__caret" aria-hidden="true">▾</span></a>
+        <div class="nav__menu">
+          <a href="chat.html#skills">Skills</a>
+          <a href="chat.html#asset=how-to-use-skills">How-to guide</a>
+        </div>
+      </div>
+      <div class="nav__drop">
+        <a href="code.html">Code <span class="nav__caret" aria-hidden="true">▾</span></a>
+        <div class="nav__menu">
+          <a href="#launchpad">Launchpad</a>
+          <a href="#skills">Skills</a>
+          <a href="#packs">Packs</a>
+          <a href="#projects">Projects</a>
+          <a href="docs.html">Docs</a>
+        </div>
+      </div>
+      <a href="index.html#about">About</a>
+      <a class="nav__cta" href="https://github.com/agrotisnicolaos" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero hero--sub" id="top">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="hero__in">
+      <p class="eyebrow reveal">A launchpad for building with Claude Code</p>
+      <h1 class="hero__title reveal">
+        Let's start building <em>together.</em>
+      </h1>
+      <p class="hero__lede reveal">
+        Start from a solid, versatile base. Add project-specific power when you need it.
+        One home for the launchpad, a marketplace of packs, and the things I build.
+      </p>
+      <div class="hero__cta reveal">
+        <a class="btn btn--primary" href="#launchpad">Get the launchpad</a>
+        <a class="btn btn--ghost" href="#skills">Explore the catalog</a>
+      </div>
+    </div>
+    <div class="meander" aria-hidden="true"></div>
+  </section>
+
+  <!-- LAUNCHPAD -->
+  <section class="section launchpad" id="launchpad">
+    <div class="section__in">
+      <div class="split">
+        <div class="split__lead">
+          <p class="kicker"><span class="kicker__bar"></span>The base</p>
+          <h2 class="h2">agr-launchpad</h2>
+          <p class="lead">
+            Instead of starting every project from an empty folder, you start from here — a curated,
+            battle-tested foundation that makes Claude noticeably more capable and disciplined.
+            It is the <em>starting place</em> for anything you want to build.
+          </p>
+          <p class="lead muted">
+            Clone it once. Trust the folder. Approve a few prompts. Then just describe what you want
+            to make. When you start a particular kind of project, layer on a pack.
+          </p>
+        </div>
+        <aside class="panel" aria-label="agr-launchpad details">
+          <div class="panel__head">
+            <span class="panel__name">agr-launchpad</span>
+            <span class="badge badge--public">public</span>
+          </div>
+          <ul class="panel__list" id="lp-highlights"></ul>
+          <div class="panel__actions">
+            <a class="btn btn--primary btn--sm" id="lp-zip" href="#">Download ZIP</a>
+            <a class="btn btn--line btn--sm" id="lp-repo" href="#" target="_blank" rel="noopener">View on GitHub ↗</a>
+          </div>
+          <button class="clone" id="lp-clone" type="button" data-clip="">
+            <code id="lp-clone-cmd"></code>
+            <span class="clone__hint">click to copy</span>
+          </button>
+        </aside>
+      </div>
+
+      <!-- why these pieces / credit -->
+      <div class="lp-why">
+        <h3 class="lp-h3">Why these pieces, put together this way</h3>
+        <p class="lead">
+          Behind every piece is someone credible who has spent real time getting it right —
+          <strong>Anthropic</strong>, <strong>Jesse Vincent</strong>, <strong>Mert Köseoğlu</strong>,
+          <strong>Alex Newman</strong>, <strong>Upstash</strong>, and <strong>Datalayer</strong>. What
+          the launchpad adds is the <em>arrangement</em>: it brings these proven tools together so they
+          work as one, covering the whole arc of building —
+          <span class="lp-arc">think → design → build → review → remember</span>. The result is
+          freedom with a safety net — you build however you like, quietly assisted the whole way,
+          without ever wiring anything together or worrying about how it fits.
+        </p>
+      </div>
+
+      <!-- the pieces -->
+      <h3 class="lp-h3 lp-h3--mt">The pieces of the puzzle</h3>
+      <p class="lp-group-label">Plugins</p>
+      <div class="grid lp-pieces">
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Workflow engine</span><span class="piece__by">Jesse Vincent</span></div>
+          <h4 class="piece__name">superpowers</h4>
+          <p class="card__desc">Disciplined workflows — brainstorm before coding, write a plan, test first, debug methodically, verify before “done.” The backbone that keeps every build rigorous.</p>
+        </article>
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Authoring</span><span class="piece__by">Anthropic</span></div>
+          <h4 class="piece__name">skill-creator</h4>
+          <p class="card__desc">Mint your own skills. Repeating a task? It scaffolds and tests a reusable skill so Claude does it your way, every time.</p>
+        </article>
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Interface</span><span class="piece__by">Anthropic</span></div>
+          <h4 class="piece__name">frontend-design</h4>
+          <p class="card__desc">Distinctive, production-grade UI that escapes the generic “AI look” — so what you ship actually looks designed.</p>
+        </article>
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Quality</span><span class="piece__by">Anthropic</span></div>
+          <h4 class="piece__name">code-review</h4>
+          <p class="card__desc">Reviews your changes for bugs and cleanups; <code>/code-review ultra</code> runs a deep multi-agent pass in the cloud before you merge.</p>
+        </article>
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Focus</span><span class="piece__by">Mert Köseoğlu</span></div>
+          <h4 class="piece__name">context-mode</h4>
+          <p class="card__desc">Keeps large tool output out of the conversation, so Claude stays fast and sharp through long sessions.</p>
+        </article>
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Memory</span><span class="piece__by">Alex Newman</span></div>
+          <h4 class="piece__name">claude-mem</h4>
+          <p class="card__desc">Persistent memory across sessions — Claude remembers your project, so you never re-explain it.</p>
+        </article>
+      </div>
+
+      <p class="lp-group-label">Live tools <span class="lp-group-label__sub">(MCP servers)</span></p>
+      <div class="grid lp-pieces">
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Live docs</span><span class="piece__by">Upstash</span></div>
+          <h4 class="piece__name">context7</h4>
+          <p class="card__desc">Pulls current docs for any library, so Claude codes against today’s API — not stale memory.</p>
+        </article>
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Your repos</span><span class="piece__by">Anthropic · MCP</span></div>
+          <h4 class="piece__name">GitHub</h4>
+          <p class="card__desc">Connects your repos, issues, and pull requests, so Claude works inside your real GitHub flow.</p>
+        </article>
+        <article class="card piece">
+          <div class="piece__top"><span class="card__marker">Notebooks</span><span class="piece__by">Datalayer</span></div>
+          <h4 class="piece__name">jupyter</h4>
+          <p class="card__desc">A live notebook kernel — Claude runs and edits <code>.ipynb</code> cells in real time.</p>
+        </article>
+      </div>
+
+      <!-- note + deep dive -->
+      <div class="lp-note">
+        <p>
+          <strong>Simple by design.</strong> The base stays deliberately small so it's yours to shape —
+          swap pieces, add your own skills, tune the rulebook. And it's built to grow: every pack and
+          skill under development here in <strong>agr·hub</strong> is made to drop straight onto this
+          launchpad.
+        </p>
+        <a class="btn btn--primary lp-deepdive" href="docs.html#launchpad">Deep dive into the launchpad →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <div class="section__in">
+      <header class="section__head">
+        <p class="kicker"><span class="kicker__bar"></span>The abilities</p>
+        <h2 class="h2">Skills</h2>
+        <p class="lead">
+          Focused abilities Claude can call on — invoked with a <code>/slash</code> command. Click a
+          card for the full picture: what it is, why it's useful, what it pairs with, an example,
+          the source repo, and a one-click ZIP. Skills tagged for chat work on claude.ai too.
+        </p>
+      </header>
+      <div class="grid" id="code-skills-grid"><!-- rendered from data/catalog.js --></div>
+    </div>
+  </section>
+
+  <!-- PACKS -->
+  <section class="section packs" id="packs">
+    <div class="section__in">
+      <header class="section__head">
+        <p class="kicker"><span class="kicker__bar"></span>The marketplace</p>
+        <h2 class="h2">Packs</h2>
+        <p class="lead">
+          Project-specific bundles of skills, agents, and tools that layer onto the base. Install one
+          with <code>/plugin</code> when you start that kind of project — the launchpad already knows
+          this marketplace.
+        </p>
+      </header>
+      <div class="grid" id="packs-grid"><!-- rendered from data/catalog.js --></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section projects" id="projects">
+    <div class="section__in">
+      <header class="section__head">
+        <p class="kicker"><span class="kicker__bar"></span>The work</p>
+        <h2 class="h2">Projects</h2>
+        <p class="lead">
+          Things I'm building — each with its own purpose, easy to explore, clone, or download.
+          More to come, with deeper write-ups along the way.
+        </p>
+      </header>
+      <div class="grid" id="projects-grid"><!-- rendered from data/catalog.js --></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <div class="foot__brand">
+      <span class="foot__logo">
+        <svg class="brand__mark" viewBox="0 0 32 32" width="30" height="30" role="img" aria-hidden="true" focusable="false">
+          <path d="M16 9.6C17.6 5.7 21.6 4.2 24.9 5.2 24.1 9.2 20.1 11.2 16 9.6Z" fill="#54A85B"/>
+          <circle cx="15.1" cy="19.4" r="9.4" fill="#F2933E"/>
+          <path d="M9.3 16.7C10.2 13.8 12.5 11.8 15.4 11.6" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2.1" stroke-linecap="round"/>
+        </svg>
+        <span class="brand__txt brand__txt--lg">agr<span class="brand__dot">·</span>hub</span>
+      </span>
+      <p>A launchpad for building with Claude Code.</p>
+    </div>
+    <nav class="foot__links" aria-label="Footer">
+      <a href="chat.html">Chat</a>
+      <a href="code.html">Code</a>
+      <a href="docs.html">Docs</a>
+      <a href="index.html#about">About</a>
+      <a href="https://github.com/agrotisnicolaos" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </div>
+  <p class="foot__copy">© <span id="year"></span> Nicolas Agrotis</p>
+</footer>
+
+<script src="data/catalog.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

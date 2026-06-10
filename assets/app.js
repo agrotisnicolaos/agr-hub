@@ -1,7 +1,8 @@
-/* agr·hub — site behavior: scroll-aware nav, catalog rendering, copy-to-clipboard. */
+/* agr·hub — site behavior: scroll-aware nav, catalog rendering, pop-out asset
+   tiles, quick index, copy-to-clipboard. All content comes from data/catalog.js. */
 (function () {
   "use strict";
-  var C = window.AGR_CATALOG || { launchpad: {}, packs: [], projects: [] };
+  var C = window.AGR_CATALOG || { launchpad: {}, skills: [], packs: [], projects: [] };
 
   /* ---------- year ---------- */
   var y = document.getElementById("year");
@@ -10,6 +11,7 @@
   /* ---------- scroll-aware nav ---------- */
   var nav = document.getElementById("nav");
   function onScroll() {
+    if (!nav) return;
     if (window.scrollY > 60) nav.classList.add("scrolled");
     else nav.classList.remove("scrolled");
   }
@@ -29,7 +31,8 @@
     });
   }
   function copyBtn(node, text) {
-    node.addEventListener("click", function () {
+    node.addEventListener("click", function (e) {
+      e.stopPropagation();
       var done = function () {
         node.classList.add("copied");
         setTimeout(function () { node.classList.remove("copied"); }, 1600);
@@ -39,13 +42,168 @@
       } else {
         var t = document.createElement("textarea");
         t.value = text; document.body.appendChild(t); t.select();
-        try { document.execCommand("copy"); } catch (e) {}
+        try { document.execCommand("copy"); } catch (err) {}
         document.body.removeChild(t); done();
       }
     });
   }
 
-  /* ---------- launchpad panel ---------- */
+  /* ---------- asset index (every asset by name) ---------- */
+  var assetIndex = {};
+  (C.skills || []).forEach(function (s) { assetIndex[s.name] = { item: s, type: "skill" }; });
+  (C.packs || []).forEach(function (p) { assetIndex[p.name] = { item: p, type: "pack" }; });
+  (C.projects || []).forEach(function (p) { assetIndex[p.name] = { item: p, type: "project" }; });
+
+  function authorBadge(a) {
+    var au = a.author || {};
+    var self = au.self === true;
+    return el("span", "badge " + (self ? "badge--self" : "badge--by"),
+      "by " + esc(self ? "Nicolas" : (au.name || "community")));
+  }
+
+  function surfacesLabel(a) {
+    var s = a.surfaces || [];
+    var parts = [];
+    if (s.indexOf("chat") !== -1) parts.push("Claude chat");
+    if (s.indexOf("code") !== -1) parts.push("Claude Code");
+    return parts.join(" · ");
+  }
+
+  function displayName(a, type) {
+    if (a.type === "guide" || type === "project" || type === "pack") return a.name === "how-to-use-skills" ? "How to use skills" : a.name;
+    return "/" + a.name;
+  }
+
+  /* ---------- pop-out tile (modal) ---------- */
+  var modalRoot = null;
+
+  function closeModal() {
+    if (!modalRoot) return;
+    modalRoot.remove();
+    modalRoot = null;
+    document.body.style.overflow = "";
+    if (/^#asset=/.test(location.hash)) {
+      history.replaceState(null, "", location.pathname + location.search);
+    }
+  }
+
+  function modalSection(title, bodyNode) {
+    var s = el("div", "tile__section");
+    s.appendChild(el("h3", "tile__h", esc(title)));
+    s.appendChild(bodyNode);
+    return s;
+  }
+
+  function openModal(name) {
+    var entry = assetIndex[name];
+    if (!entry) return;
+    var a = entry.item, type = entry.type;
+    closeModal();
+
+    var backdrop = el("div", "tile-backdrop");
+    var tile = el("div", "tile");
+    tile.setAttribute("role", "dialog");
+    tile.setAttribute("aria-modal", "true");
+    tile.setAttribute("aria-label", a.name);
+
+    var close = el("button", "tile__close", "✕");
+    close.type = "button";
+    close.setAttribute("aria-label", "Close");
+    close.addEventListener("click", closeModal);
+    tile.appendChild(close);
+
+    /* head */
+    var top = el("div", "tile__top");
+    top.appendChild(el("span", "card__marker", esc(a.marker || type)));
+    top.appendChild(authorBadge(a));
+    var surf = surfacesLabel(a);
+    if (surf) top.appendChild(el("span", "tile__surfaces", "Works in: " + esc(surf)));
+    tile.appendChild(top);
+    tile.appendChild(el("h2", "tile__name", esc(displayName(a, type))));
+
+    /* credit line */
+    if (a.origin && a.origin.url) {
+      tile.appendChild(el("p", "tile__credit",
+        "Credit: first conceived in <a href=\"" + esc(a.origin.url) + "\" target=\"_blank\" rel=\"noopener\">" +
+        esc(a.origin.label || a.origin.url) + " ↗</a>"));
+    }
+
+    /* actions */
+    var actions = el("div", "tile__actions");
+    if (a.zipUrl) {
+      var z = el("a", "btn btn--primary btn--sm", "⬇ Download ZIP");
+      z.href = a.zipUrl;
+      if (!/^https?:/.test(a.zipUrl)) z.setAttribute("download", "");
+      actions.appendChild(z);
+    }
+    var srcUrl = a.url || a.repoUrl;
+    if (srcUrl) {
+      var v = el("a", "btn btn--line btn--sm", "View source on GitHub ↗");
+      v.href = srcUrl; v.target = "_blank"; v.rel = "noopener";
+      actions.appendChild(v);
+    }
+    if (actions.childNodes.length) tile.appendChild(actions);
+    if (type === "pack" && a.visibility === "public") {
+      var cmd = a.install || ("/plugin install " + a.name + "@" + (C.marketplace || "agr-hub"));
+      var clone = el("button", "clone");
+      clone.type = "button";
+      clone.appendChild(el("code", null, esc(cmd)));
+      clone.appendChild(el("span", "clone__hint", "click to copy"));
+      copyBtn(clone, cmd);
+      tile.appendChild(clone);
+    }
+
+    /* the four sections */
+    if (a.what) tile.appendChild(modalSection("What is it?", el("p", "tile__p", esc(a.what))));
+    if (a.why) tile.appendChild(modalSection("Why is it useful?", el("p", "tile__p", esc(a.why))));
+
+    if (a.worksWith && a.worksWith.length) {
+      var ul = el("ul", "tile__with");
+      a.worksWith.forEach(function (w) {
+        var li = el("li", null);
+        if (assetIndex[w.name]) {
+          var b = el("button", "tile__chip", esc(w.name));
+          b.type = "button";
+          b.addEventListener("click", function () { openModal(w.name); });
+          li.appendChild(b);
+        } else {
+          li.appendChild(el("strong", "tile__chip tile__chip--plain", esc(w.name)));
+        }
+        if (w.note) li.appendChild(el("span", "tile__withnote", " — " + esc(w.note)));
+        ul.appendChild(li);
+      });
+      tile.appendChild(modalSection("What it works well with", ul));
+    }
+
+    if (a.guideSections && a.guideSections.length) {
+      a.guideSections.forEach(function (g) {
+        var ol = el("ol", "tile__steps");
+        (g.steps || []).forEach(function (st) { ol.appendChild(el("li", null, esc(st))); });
+        tile.appendChild(modalSection(g.title, ol));
+      });
+    }
+
+    if (a.example) {
+      var ex = el("div", null);
+      ex.appendChild(el("p", "tile__p tile__example", esc(a.example)));
+      if (a.exampleCode) ex.appendChild(el("p", "tile__p tile__examplecode", esc(a.exampleCode)));
+      tile.appendChild(modalSection("Example", ex));
+    }
+
+    backdrop.appendChild(tile);
+    backdrop.addEventListener("click", function (e) { if (e.target === backdrop) closeModal(); });
+    document.body.appendChild(backdrop);
+    document.body.style.overflow = "hidden";
+    modalRoot = backdrop;
+    close.focus();
+    history.replaceState(null, "", "#asset=" + encodeURIComponent(name));
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeModal();
+  });
+
+  /* ---------- launchpad panel (code page) ---------- */
   var lp = C.launchpad || {};
   var hl = document.getElementById("lp-highlights");
   if (hl && lp.highlights) {
@@ -64,6 +222,30 @@
   }
 
   /* ---------- card builders ---------- */
+  function clickableCard(card, name) {
+    card.classList.add("card--asset");
+    card.setAttribute("role", "button");
+    card.setAttribute("tabindex", "0");
+    card.addEventListener("click", function () { openModal(name); });
+    card.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openModal(name); }
+    });
+  }
+
+  function skillCard(s) {
+    var card = el("article", "card" + (s.type === "guide" ? " card--guide" : ""));
+    var top = el("div", "card__top");
+    top.appendChild(el("span", "card__marker", esc(s.marker || "Skill")));
+    top.appendChild(authorBadge(s));
+    card.appendChild(top);
+    card.appendChild(el("h3", "card__name", esc(displayName(s, "skill"))));
+    card.appendChild(el("p", "card__desc", esc(s.description)));
+    card.appendChild(el("span", "card__link",
+      s.type === "guide" ? "Open the guide →" : "What is it? Why useful? →"));
+    clickableCard(card, s.name);
+    return card;
+  }
+
   function packCard(p) {
     var card = el("article", "card");
     var top = el("div", "card__top");
@@ -75,13 +257,7 @@
     card.appendChild(el("p", "card__desc", esc(p.description)));
 
     if (p.visibility === "public") {
-      var actions = el("div", "card__actions");
-      if (p.repoUrl) {
-        var v = el("a", "btn btn--line btn--sm", "View ↗");
-        v.href = p.repoUrl; v.target = "_blank"; v.rel = "noopener";
-        actions.appendChild(v);
-      }
-      card.appendChild(actions);
+      card.appendChild(el("span", "card__link", "What is it? Why useful? →"));
       var cmd = p.install || ("/plugin install " + p.name + "@" + (C.marketplace || "agr-hub"));
       var clone = el("button", "clone card__install");
       clone.type = "button";
@@ -89,22 +265,8 @@
       clone.appendChild(el("span", "clone__hint", "click to copy"));
       copyBtn(clone, cmd);
       card.appendChild(clone);
+      clickableCard(card, p.name);
     }
-    return card;
-  }
-
-  function skillCard(s) {
-    var href = s.url || s.repoUrl;
-    // the whole card is a link straight to this skill's SKILL.md
-    var card = el(href ? "a" : "article", "card" + (href ? " card--link" : ""));
-    if (href) { card.href = href; card.target = "_blank"; card.rel = "noopener"; }
-    var top = el("div", "card__top");
-    top.appendChild(el("span", "card__marker", esc(s.marker || "Skill")));
-    if (s.home) top.appendChild(el("span", "badge badge--ships", "in " + esc(s.home)));
-    card.appendChild(top);
-    card.appendChild(el("h3", "card__name", "/" + esc(s.name)));
-    card.appendChild(el("p", "card__desc", esc(s.description)));
-    if (href) card.appendChild(el("span", "card__link", "View skill ↗"));
     return card;
   }
 
@@ -145,6 +307,12 @@
 
     if (p.visibility === "public") {
       var actions = el("div", "card__actions");
+      if (p.what || p.why) {
+        var d = el("button", "btn btn--line btn--sm", "What is it? →");
+        d.type = "button";
+        d.addEventListener("click", function () { openModal(p.name); });
+        actions.appendChild(d);
+      }
       if (p.zipUrl) {
         var z = el("a", "btn btn--primary btn--sm", "Download ZIP");
         z.href = p.zipUrl; actions.appendChild(z);
@@ -156,12 +324,12 @@
       }
       card.appendChild(actions);
       if (p.repoUrl) {
-        var gitCmd = "git clone " + p.repoUrl + ".git";
+        var gitCmd2 = "git clone " + p.repoUrl + ".git";
         var clone = el("button", "clone card__install");
         clone.type = "button";
-        clone.appendChild(el("code", null, esc(gitCmd)));
+        clone.appendChild(el("code", null, esc(gitCmd2)));
         clone.appendChild(el("span", "clone__hint", "click to copy"));
-        copyBtn(clone, gitCmd);
+        copyBtn(clone, gitCmd2);
         card.appendChild(clone);
       }
     }
@@ -182,7 +350,19 @@
     items.forEach(function (it) { grid.appendChild(builder(it)); });
   }
 
-  renderGrid("skills-grid", C.skills, skillCard, {
+  function bySurface(surface) {
+    return (C.skills || []).filter(function (s) {
+      return (s.surfaces || []).indexOf(surface) !== -1;
+    });
+  }
+
+  renderGrid("chat-skills-grid", bySurface("chat"), skillCard, {
+    mark: "/",
+    title: "Skills, coming soon",
+    body: "Skills for Claude chat will be listed here as they're built and shared."
+  });
+
+  renderGrid("code-skills-grid", bySurface("code"), skillCard, {
     mark: "/",
     title: "Skills, coming soon",
     body: "Individual skills will be listed here as they're built and shared."
@@ -200,4 +380,41 @@
     title: "Projects, coming soon",
     body: "Things I'm building will be showcased here — each easy to explore, clone, or download."
   });
+
+  /* ---------- quick index (landing page) ---------- */
+  var qi = document.getElementById("qi-root");
+  if (qi) {
+    function qiCol(title, page, items, soonText) {
+      var col = el("div", "qi__col");
+      col.appendChild(el("h3", "qi__h", esc(title) + " <span class=\"qi__count\">" + items.length + "</span>"));
+      if (!items.length) {
+        col.appendChild(el("p", "qi__soon", esc(soonText)));
+        return col;
+      }
+      var list = el("div", "qi__chips");
+      items.forEach(function (it) {
+        var a = el("a", "qi__chip" + (it.type === "guide" ? " qi__chip--guide" : ""),
+          esc(it.type === "guide" ? "📖 " + displayName(it, "skill") : it.name));
+        a.href = page + "#asset=" + encodeURIComponent(it.name);
+        list.appendChild(a);
+      });
+      col.appendChild(list);
+      return col;
+    }
+    qi.appendChild(qiCol("Chat skills", "chat.html", bySurface("chat"), "Coming soon."));
+    qi.appendChild(qiCol("Code skills", "code.html", bySurface("code"), "Coming soon."));
+    qi.appendChild(qiCol("Packs", "code.html", C.packs || [], "The first packs are taking shape."));
+    qi.appendChild(qiCol("Projects", "code.html", C.projects || [], "Coming soon."));
+  }
+
+  /* ---------- deep links: #asset=<name> opens the pop-out tile ---------- */
+  function openFromHash() {
+    var m = location.hash.match(/^#asset=(.+)$/);
+    if (m) {
+      var name = decodeURIComponent(m[1]);
+      if (assetIndex[name]) openModal(name);
+    }
+  }
+  window.addEventListener("hashchange", openFromHash);
+  openFromHash();
 })();
