@@ -16,8 +16,8 @@ read this.
 
 ## The website is data-driven
 
-The site renders from [`data/catalog.js`](data/catalog.js): `skills`, `plugins`, and `projects`
-arrays. Edit, commit, push — GitHub Pages redeploys. No build step.
+The site renders from [`data/catalog.js`](data/catalog.js): `skills`, `agents`, `plugins`, and
+`projects` arrays. Edit, commit, push — GitHub Pages redeploys. No build step.
 
 Key fields per asset (see the comment block at the top of catalog.js for the full list):
 
@@ -25,7 +25,7 @@ Key fields per asset (see the comment block at the top of catalog.js for the ful
   AND Claude Code carry both.
 - `theme` — the thematic group heading the card renders under ("Getting started", "Think & plan",
   "Workflow & discipline", …). New themes appear automatically, in catalog order.
-- `author { name, self }` — `self: true` renders a "by Nicolas" tag; otherwise the maker's name.
+- `author { name, self }` — `self: true` renders a "by Nicolas Agrotis" tag; otherwise the maker's name.
 - `origin { label, url }` — credit line in the pop-out tile: "first conceived in <repo>".
 - `what / why / worksWith / example` — the four plain-language sections of the pop-out tile.
 - `zipUrl` — the Download button. For skills this points at `downloads/skills/<name>.zip`.
@@ -41,6 +41,12 @@ Key fields per asset (see the comment block at the top of catalog.js for the ful
 3. Add a card to the `skills` array with `surfaces`, `theme`, the four tile sections, `zipUrl`,
    and — if it came from someone else — `author` + `origin` credit.
 4. Commit the catalog change AND the new zip. Push.
+
+## Add an AGENT
+
+Agents are subagent definitions (`.claude/agents/<name>.md`) that ship inside agr-launchpad —
+no separate download. Add a card to the `agents` array with `theme`, the four tile sections,
+`author`/`origin` credit, and a `url` pointing at the agent's `.md` in the launchpad repo.
 
 ## Add a PLUGIN (recommendation card for a Claude Code plugin)
 

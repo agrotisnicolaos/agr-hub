@@ -2,7 +2,7 @@
    tiles, quick index, copy-to-clipboard. All content comes from data/catalog.js. */
 (function () {
   "use strict";
-  var C = window.AGR_CATALOG || { launchpad: {}, skills: [], plugins: [], projects: [] };
+  var C = window.AGR_CATALOG || { launchpad: {}, skills: [], plugins: [], agents: [], projects: [] };
 
   /* ---------- year ---------- */
   var y = document.getElementById("year");
@@ -52,13 +52,14 @@
   var assetIndex = {};
   (C.skills || []).forEach(function (s) { assetIndex[s.name] = { item: s, type: "skill" }; });
   (C.plugins || []).forEach(function (p) { assetIndex[p.name] = { item: p, type: "plugin" }; });
+  (C.agents || []).forEach(function (a) { assetIndex[a.name] = { item: a, type: "agent" }; });
   (C.projects || []).forEach(function (p) { assetIndex[p.name] = { item: p, type: "project" }; });
 
   function authorBadge(a) {
     var au = a.author || {};
     var self = au.self === true;
     return el("span", "badge " + (self ? "badge--self" : "badge--by"),
-      "by " + esc(self ? "Nicolas" : (au.name || "community")));
+      "by " + esc(self ? "Nicolas Agrotis" : (au.name || "community")));
   }
 
   function surfacesLabel(a) {
@@ -71,7 +72,7 @@
 
   function displayName(a, type) {
     if (a.title) return a.title;
-    if (a.type === "guide" || type === "project" || type === "plugin") return a.name;
+    if (a.type === "guide" || type === "project" || type === "plugin" || type === "agent") return a.name;
     return "/" + a.name;
   }
 
@@ -251,6 +252,19 @@
     return card;
   }
 
+  function agentCard(a) {
+    var card = el("article", "card");
+    var top = el("div", "card__top");
+    top.appendChild(el("span", "card__marker", esc(a.marker || "Agent")));
+    top.appendChild(authorBadge(a));
+    card.appendChild(top);
+    card.appendChild(el("h3", "card__name", esc(a.name)));
+    card.appendChild(el("p", "card__desc", esc(a.description)));
+    card.appendChild(el("span", "card__link", "What is it? Why useful? →"));
+    clickableCard(card, a.name);
+    return card;
+  }
+
   function pluginCard(p) {
     var card = el("article", "card");
     var top = el("div", "card__top");
@@ -290,8 +304,11 @@
     }
     var top = el("div", "card__top");
     top.appendChild(el("span", "card__marker", esc(p.marker || "Project")));
-    top.appendChild(el("span", "badge badge--" + (p.visibility === "public" ? "public" : "private"),
+    var meta = el("span", "card__badges");
+    meta.appendChild(authorBadge(p));
+    meta.appendChild(el("span", "badge badge--" + (p.visibility === "public" ? "public" : "private"),
       p.visibility === "public" ? "public" : "in dev"));
+    top.appendChild(meta);
     card.appendChild(top);
     card.appendChild(el("h3", "card__name", esc(p.name)));
     card.appendChild(el("p", "card__desc", esc(p.description)));
@@ -387,6 +404,12 @@
     body: "Individual skills will be listed here as they're built and shared."
   });
 
+  renderGroups("agents-grid", C.agents, agentCard, {
+    mark: "◈",
+    title: "Agents, coming soon",
+    body: "Specialist subagents will be listed here as they're built and shared."
+  });
+
   renderGroups("plugins-grid", C.plugins, pluginCard, {
     mark: "⌁",
     title: "Plugins, coming soon",
@@ -422,6 +445,7 @@
     }
     qi.appendChild(qiCol("Chat skills", "chat.html", bySurface("chat"), "Coming soon."));
     qi.appendChild(qiCol("Code skills", "code.html", bySurface("code"), "Coming soon."));
+    qi.appendChild(qiCol("Agents", "code.html", C.agents || [], "Coming soon."));
     qi.appendChild(qiCol("Plugins", "code.html", C.plugins || [], "Coming soon."));
     qi.appendChild(qiCol("Projects", "code.html", C.projects || [], "Coming soon."));
   }

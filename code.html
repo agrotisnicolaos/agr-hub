@@ -4,11 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Code — agr·hub</title>
-<meta name="description" content="A launchpad for building with Claude Code — a batteries-included starter kit, individual skills, hand-picked plugins, and a showcase of projects." />
+<meta name="description" content="A launchpad for building with Claude Code — a batteries-included starter kit, individual skills, specialist agents, hand-picked plugins, and a showcase of projects." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/app.css?v=3" />
+<link rel="stylesheet" href="assets/app.css?v=4" />
 </head>
 <body>
 
@@ -37,6 +37,7 @@
         <div class="nav__menu">
           <a href="#launchpad">Launchpad</a>
           <a href="#skills">Skills</a>
+          <a href="#agents">Agents</a>
           <a href="#plugins">Plugins</a>
           <a href="#projects">Projects</a>
           <a href="docs.html">Docs</a>
@@ -120,62 +121,98 @@
           freedom with a safety net — you build however you like, quietly assisted the whole way,
           without ever wiring anything together or worrying about how it fits.
         </p>
+        <p class="lead">
+          The repository is built so that its assets <strong>communicate with one another</strong>
+          whenever they need to: the planner hands off to the builder, the builder to the reviewer,
+          the verifier looks at what was actually rendered, and memory carries it all into the next
+          session. Together they make sure <strong>nothing falls through the cracks</strong> — and
+          that's the whole point: <em>bridging the gap between ideation and robust project building</em>.
+        </p>
       </div>
 
-      <!-- the pieces -->
+      <!-- the pieces — an index, not a card grid: these are the launchpad's
+           contents, listed for reading (the clickable catalog lives below) -->
       <h3 class="lp-h3 lp-h3--mt">The pieces of the puzzle</h3>
       <p class="lp-group-label">Plugins</p>
-      <div class="grid lp-pieces">
-        <article class="card piece">
-          <div class="piece__top"><span class="card__marker">Workflow engine</span><span class="piece__by">Jesse Vincent</span></div>
-          <h4 class="piece__name">superpowers</h4>
-          <p class="card__desc">Disciplined workflows — brainstorm before coding, write a plan, test first, debug methodically, verify before “done.” The backbone that keeps every build rigorous.</p>
-        </article>
-        <article class="card piece">
-          <div class="piece__top"><span class="card__marker">Authoring</span><span class="piece__by">Anthropic</span></div>
-          <h4 class="piece__name">skill-creator</h4>
-          <p class="card__desc">Mint your own skills. Repeating a task? It scaffolds and tests a reusable skill so Claude does it your way, every time.</p>
-        </article>
-        <article class="card piece">
-          <div class="piece__top"><span class="card__marker">Interface</span><span class="piece__by">Anthropic</span></div>
-          <h4 class="piece__name">frontend-design</h4>
-          <p class="card__desc">Distinctive, production-grade UI that escapes the generic “AI look” — so what you ship actually looks designed.</p>
-        </article>
-        <article class="card piece">
-          <div class="piece__top"><span class="card__marker">Quality</span><span class="piece__by">Anthropic</span></div>
-          <h4 class="piece__name">code-review</h4>
-          <p class="card__desc">Reviews your changes for bugs and cleanups; <code>/code-review ultra</code> runs a deep multi-agent pass in the cloud before you merge.</p>
-        </article>
-        <article class="card piece">
-          <div class="piece__top"><span class="card__marker">Focus</span><span class="piece__by">Mert Köseoğlu</span></div>
-          <h4 class="piece__name">context-mode</h4>
-          <p class="card__desc">Keeps large tool output out of the conversation, so Claude stays fast and sharp through long sessions.</p>
-        </article>
-        <article class="card piece">
-          <div class="piece__top"><span class="card__marker">Memory</span><span class="piece__by">Alex Newman</span></div>
-          <h4 class="piece__name">claude-mem</h4>
-          <p class="card__desc">Persistent memory across sessions — Claude remembers your project, so you never re-explain it.</p>
-        </article>
-      </div>
+      <ul class="lp-list">
+        <li class="lp-row">
+          <span class="lp-row__name">superpowers</span>
+          <span class="lp-row__body"><span class="lp-row__marker">Workflow engine</span>Disciplined workflows — brainstorm before coding, write a plan, test first, debug methodically, verify before “done.” The backbone that keeps every build rigorous.</span>
+          <span class="lp-row__by">Jesse Vincent</span>
+        </li>
+        <li class="lp-row">
+          <span class="lp-row__name">skill-creator</span>
+          <span class="lp-row__body"><span class="lp-row__marker">Authoring</span>Mint your own skills. Repeating a task? It scaffolds and tests a reusable skill so Claude does it your way, every time.</span>
+          <span class="lp-row__by">Anthropic</span>
+        </li>
+        <li class="lp-row">
+          <span class="lp-row__name">frontend-design</span>
+          <span class="lp-row__body"><span class="lp-row__marker">Interface</span>Distinctive, production-grade UI that escapes the generic “AI look” — so what you ship actually looks designed.</span>
+          <span class="lp-row__by">Anthropic</span>
+        </li>
+        <li class="lp-row">
+          <span class="lp-row__name">code-review</span>
+          <span class="lp-row__body"><span class="lp-row__marker">Quality</span>Reviews your changes for bugs and cleanups; <code>/code-review ultra</code> runs a deep multi-agent pass in the cloud before you merge.</span>
+          <span class="lp-row__by">Anthropic</span>
+        </li>
+        <li class="lp-row">
+          <span class="lp-row__name">context-mode</span>
+          <span class="lp-row__body"><span class="lp-row__marker">Focus</span>Keeps large tool output out of the conversation, so Claude stays fast and sharp through long sessions.</span>
+          <span class="lp-row__by">Mert Köseoğlu</span>
+        </li>
+        <li class="lp-row">
+          <span class="lp-row__name">claude-mem</span>
+          <span class="lp-row__body"><span class="lp-row__marker">Memory</span>Persistent memory across sessions — Claude remembers your project, so you never re-explain it.</span>
+          <span class="lp-row__by">Alex Newman</span>
+        </li>
+      </ul>
 
       <p class="lp-group-label">Live tools <span class="lp-group-label__sub">(MCP servers)</span></p>
-      <div class="grid lp-pieces">
-        <article class="card piece">
-          <div class="piece__top"><span class="card__marker">Live docs</span><span class="piece__by">Upstash</span></div>
-          <h4 class="piece__name">context7</h4>
-          <p class="card__desc">Pulls current docs for any library, so Claude codes against today’s API — not stale memory.</p>
-        </article>
-        <article class="card piece">
-          <div class="piece__top"><span class="card__marker">Your repos</span><span class="piece__by">Anthropic · MCP</span></div>
-          <h4 class="piece__name">GitHub</h4>
-          <p class="card__desc">Connects your repos, issues, and pull requests, so Claude works inside your real GitHub flow.</p>
-        </article>
-        <article class="card piece">
-          <div class="piece__top"><span class="card__marker">Notebooks</span><span class="piece__by">Datalayer</span></div>
-          <h4 class="piece__name">jupyter</h4>
-          <p class="card__desc">A live notebook kernel — Claude runs and edits <code>.ipynb</code> cells in real time.</p>
-        </article>
-      </div>
+      <ul class="lp-list">
+        <li class="lp-row">
+          <span class="lp-row__name">context7</span>
+          <span class="lp-row__body"><span class="lp-row__marker">Live docs</span>Pulls current docs for any library, so Claude codes against today’s API — not stale memory.</span>
+          <span class="lp-row__by">Upstash</span>
+        </li>
+        <li class="lp-row">
+          <span class="lp-row__name">GitHub</span>
+          <span class="lp-row__body"><span class="lp-row__marker">Your repos</span>Connects your repos, issues, and pull requests, so Claude works inside your real GitHub flow — via GitHub’s official hosted MCP server.</span>
+          <span class="lp-row__by">GitHub</span>
+        </li>
+        <li class="lp-row">
+          <span class="lp-row__name">jupyter</span>
+          <span class="lp-row__body"><span class="lp-row__marker">Notebooks</span>A live notebook kernel — Claude runs and edits <code>.ipynb</code> cells in real time.</span>
+          <span class="lp-row__by">Datalayer</span>
+        </li>
+        <li class="lp-row">
+          <span class="lp-row__name">chrome-devtools</span>
+          <span class="lp-row__body"><span class="lp-row__marker">Eyes on the UI</span>Optional: screenshots, console, and network from a real browser — so Claude can visually verify UI work instead of assuming.</span>
+          <span class="lp-row__by">Chrome DevTools</span>
+        </li>
+      </ul>
+
+      <p class="lp-group-label">Companion VS Code extensions</p>
+      <ul class="lp-list">
+        <li class="lp-row">
+          <span class="lp-row__name">markitdown</span>
+          <span class="lp-row__body"><span class="lp-row__marker">Documents in</span>Converts PDFs, Word docs, and slides into Markdown Claude can actually read — right from VS Code.</span>
+          <span class="lp-row__by">BioInfo · Microsoft</span>
+        </li>
+        <li class="lp-row">
+          <span class="lp-row__name">CodeTour</span>
+          <span class="lp-row__body"><span class="lp-row__marker">Guided tours</span>Plays the step-by-step code walkthroughs the bundled <code>code-tour</code> skill produces.</span>
+          <span class="lp-row__by">Microsoft</span>
+        </li>
+      </ul>
+
+      <p class="lp-group-label">Already in the repo <span class="lp-group-label__sub">(no install — they arrive with the clone)</span></p>
+      <p class="lp-inrepo">
+        The launchpad also vendors <strong>11 universal skills</strong> — coding standards, error
+        handling, secure coding, API design, backend &amp; frontend patterns, webapp testing, and
+        more — and <strong>3 specialist agents</strong>: architect, code-architect, and
+        code-explorer. Every one of them is documented in the catalog below:
+        <a href="#skills">browse the skills</a> or <a href="#agents">meet the agents</a>.
+      </p>
 
       <!-- note + deep dive -->
       <div class="lp-note">
@@ -203,6 +240,23 @@
         </p>
       </header>
       <div class="groups" id="code-skills-grid"><!-- rendered from data/catalog.js --></div>
+    </div>
+  </section>
+
+  <!-- AGENTS -->
+  <section class="section agents" id="agents">
+    <div class="section__in">
+      <header class="section__head">
+        <p class="kicker"><span class="kicker__bar"></span>The specialists</p>
+        <h2 class="h2">Agents</h2>
+        <p class="lead">
+          Focused subagents Claude Code can dispatch for a job — each runs with its own brief and
+          its own context, then reports back. All three ship inside the
+          <a href="#launchpad">launchpad</a>, so cloning it installs them; there's nothing extra to
+          set up. Click a card for what each one is for and when Claude reaches for it.
+        </p>
+      </header>
+      <div class="groups" id="agents-grid"><!-- rendered from data/catalog.js --></div>
     </div>
   </section>
 
@@ -264,7 +318,7 @@
   <p class="foot__copy">© <span id="year"></span> Nicolas Agrotis</p>
 </footer>
 
-<script src="data/catalog.js?v=3"></script>
-<script src="assets/app.js?v=3"></script>
+<script src="data/catalog.js?v=4"></script>
+<script src="assets/app.js?v=4"></script>
 </body>
 </html>

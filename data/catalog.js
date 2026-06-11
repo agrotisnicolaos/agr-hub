@@ -33,15 +33,15 @@ window.AGR_CATALOG = {
     name: "agr-launchpad",
     tagline: "The base. Clone it once, build anything.",
     description:
-      "A batteries-included Claude Code starter kit: a lean universal core of the best general-purpose plugins, MCP servers, skills, and agents — plus a packs system for layering on project-specific power.",
+      "A batteries-included Claude Code starter kit: a lean universal core of the best general-purpose plugins, MCP servers, skills, and agents — wired so the assets communicate with each other when they need to, nothing falls through the cracks, and the gap between ideation and robust project building closes. A packs system layers on project-specific power.",
     repoUrl: "https://github.com/agrotisnicolaos/agr-launchpad",
     zipUrl: "https://github.com/agrotisnicolaos/agr-launchpad/archive/refs/heads/main.zip",
     highlights: [
       "superpowers · skill-creator · frontend-design",
       "code-review with ultra cloud review",
       "context-mode · claude-mem memory",
-      "context7 · GitHub · live Jupyter MCP",
-      "Universal skills & agents, zero-install",
+      "context7 · GitHub · Jupyter · Chrome DevTools MCP",
+      "11 universal skills + 3 agents, zero-install",
       "A packs system to grow into any project",
     ],
   },
@@ -177,6 +177,7 @@ window.AGR_CATALOG = {
       theme: "Think & plan",
       surfaces: ["chat", "code"],
       author: { name: "Nicolas Agrotis", self: true },
+      origin: { label: "mattpocock/skills", url: "https://github.com/mattpocock/skills" },
       description: "Interviews you relentlessly about a plan or design until every decision is resolved.",
       what:
         "A skill that turns Claude into a thorough interviewer. Before you start a piece of work, it asks you question after question about your plan — one at a time, each with a recommended answer — until every fuzzy part is pinned down.",
@@ -193,6 +194,223 @@ window.AGR_CATALOG = {
       home: "agr-launchpad",
       url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/grill-me/SKILL.md",
       zipUrl: "downloads/skills/grill-me.zip",
+    },
+    {
+      name: "coding-standards",
+      marker: "Foundation",
+      theme: "Engineering foundations",
+      surfaces: ["code"],
+      author: { name: "ECC community", url: "https://github.com/affaan-m/ECC", self: false },
+      origin: { label: "affaan-m/ECC", url: "https://github.com/affaan-m/ECC" },
+      description: "Baseline cross-project conventions — naming, readability, immutability, and code-quality review.",
+      what:
+        "A foundational skill that holds Claude to a consistent code-quality bar in any language: clear naming, early returns, immutability by default, no dead code. It's the rulebook the other engineering skills build on.",
+      why:
+        "Without a shared standard, every session reinvents style. This keeps code readable and reviews consistent — whoever (or whatever) wrote the last file.",
+      worksWith: [
+        { name: "error-handling", note: "Standards for the happy path, patterns for the unhappy one." },
+        { name: "secure-coding", note: "Clean code first, then safe code." },
+      ],
+      example:
+        "It kicks in automatically while Claude writes or reviews code — or ask directly: “review this file against our coding standards.”",
+      home: "agr-launchpad",
+      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/coding-standards/SKILL.md",
+      zipUrl: "downloads/skills/coding-standards.zip",
+    },
+    {
+      name: "error-handling",
+      marker: "Foundation",
+      theme: "Engineering foundations",
+      surfaces: ["code"],
+      author: { name: "ECC community", url: "https://github.com/affaan-m/ECC", self: false },
+      origin: { label: "affaan-m/ECC", url: "https://github.com/affaan-m/ECC" },
+      description: "Robust error handling across TypeScript, Python, and Go — typed errors, retries, circuit breakers, humane messages.",
+      what:
+        "Patterns for the unhappy path: typed errors, error boundaries, retry and circuit-breaker strategies, and user-facing messages that actually help instead of leaking stack traces.",
+      why:
+        "Most code looks fine until something fails. This skill makes Claude design for failure up front — the difference between an app that crashes and one that degrades gracefully.",
+      worksWith: [
+        { name: "coding-standards", note: "The foundation pair: clean code plus resilient code." },
+        { name: "backend-patterns", note: "Server-side code is where failure handling earns its keep." },
+      ],
+      example:
+        "Say “add error handling to this API client” and you get typed errors with retries and backoff — not a bare try/catch.",
+      home: "agr-launchpad",
+      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/error-handling/SKILL.md",
+      zipUrl: "downloads/skills/error-handling.zip",
+    },
+    {
+      name: "code-tour",
+      marker: "Onboarding",
+      theme: "Engineering foundations",
+      surfaces: ["code"],
+      author: { name: "ECC community", url: "https://github.com/affaan-m/ECC", self: false },
+      origin: { label: "affaan-m/ECC", url: "https://github.com/affaan-m/ECC" },
+      description: "Turns “explain how this works” into a playable, step-by-step walkthrough of your real code.",
+      what:
+        "A skill that writes CodeTour files — guided walkthroughs anchored to real files and lines, played inside VS Code. Onboarding tours, architecture tours, PR tours, post-mortem tours.",
+      why:
+        "Documentation drifts; tours point at the actual code. New teammates (including future you) walk through the system step by step instead of spelunking.",
+      worksWith: [
+        { name: "CodeTour (VS Code extension)", note: "Plays the .tour files this skill produces." },
+      ],
+      example:
+        "Ask “create an onboarding tour of the payment flow” and you get a guided, clickable walkthrough through the exact files involved.",
+      home: "agr-launchpad",
+      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/code-tour/SKILL.md",
+      zipUrl: "downloads/skills/code-tour.zip",
+    },
+    {
+      name: "api-design",
+      marker: "Backend",
+      theme: "Backend & APIs",
+      surfaces: ["code"],
+      author: { name: "ECC community", url: "https://github.com/affaan-m/ECC", self: false },
+      origin: { label: "affaan-m/ECC", url: "https://github.com/affaan-m/ECC" },
+      description: "Production-grade REST API design — resource naming, status codes, pagination, versioning, rate limiting.",
+      what:
+        "The contract side of backend work: how endpoints are named, which status codes mean what, how pagination, filtering, errors, and versioning should behave — before any code is written.",
+      why:
+        "APIs are forever; a sloppy contract haunts every client that ever integrates. This bakes the conventions in from the first endpoint.",
+      worksWith: [
+        { name: "backend-patterns", note: "api-design shapes the contract; backend-patterns builds what's behind it." },
+        { name: "error-handling", note: "Error responses are part of the contract too." },
+      ],
+      example:
+        "Say “design the API for a bookings service” and you get consistent resources, correct status codes, and a pagination story — not ad-hoc routes.",
+      home: "agr-launchpad",
+      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/api-design/SKILL.md",
+      zipUrl: "downloads/skills/api-design.zip",
+    },
+    {
+      name: "backend-patterns",
+      marker: "Backend",
+      theme: "Backend & APIs",
+      surfaces: ["code"],
+      author: { name: "ECC community", url: "https://github.com/affaan-m/ECC", self: false },
+      origin: { label: "affaan-m/ECC", url: "https://github.com/affaan-m/ECC" },
+      description: "Server-side architecture done right — service layering, data access, caching, queues, database optimization.",
+      what:
+        "The structural patterns behind solid backends: service layers, repositories, caching strategy, background queues, and query optimization. Examples use Node.js, but the patterns are general.",
+      why:
+        "Backends rot fastest when structure is improvised. These patterns keep business logic, data access, and infrastructure cleanly separated as the codebase grows.",
+      worksWith: [
+        { name: "api-design", note: "Contract on the outside, patterns on the inside." },
+        { name: "secure-coding", note: "Server-side code handles the data worth protecting." },
+      ],
+      example:
+        "Say “add a caching layer for these product queries” and you get a deliberate strategy — what to cache, for how long, and how it invalidates.",
+      home: "agr-launchpad",
+      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/backend-patterns/SKILL.md",
+      zipUrl: "downloads/skills/backend-patterns.zip",
+    },
+    {
+      name: "frontend-patterns",
+      marker: "Frontend",
+      theme: "Frontend & verification",
+      surfaces: ["code"],
+      author: { name: "ECC community", url: "https://github.com/affaan-m/ECC", self: false },
+      origin: { label: "affaan-m/ECC", url: "https://github.com/affaan-m/ECC" },
+      description: "Frontend engineering structure — components, state management, data fetching, rendering performance.",
+      what:
+        "The engineering half of frontend work: how components are structured, where state lives, how data is fetched and cached, and what keeps rendering fast. Examples use React; the ideas travel.",
+      why:
+        "Pretty interfaces with messy internals collapse on the second feature. This keeps the logic layer as deliberate as the visual one.",
+      worksWith: [
+        { name: "frontend-design", note: "frontend-design owns how it looks; frontend-patterns owns how it's built." },
+        { name: "webapp-testing", note: "Build it well, then watch it actually run." },
+      ],
+      example:
+        "Say “this page re-renders constantly, fix it” and you get a real diagnosis — state placement, memoization, fetch strategy — not a random tweak.",
+      home: "agr-launchpad",
+      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/frontend-patterns/SKILL.md",
+      zipUrl: "downloads/skills/frontend-patterns.zip",
+    },
+    {
+      name: "html",
+      marker: "Artifacts",
+      theme: "Frontend & verification",
+      surfaces: ["code"],
+      author: { name: "Nicolas Agrotis", self: true },
+      description: "One-file, no-build HTML artifacts — dashboards, charts, and reports that open with a double-click.",
+      what:
+        "A skill for producing standalone single-file HTML: dashboards, data visualizations, printable reports. Everything inlined — no build step, no server, no dependencies to install.",
+      why:
+        "Sometimes the right deliverable is a file you can email to anyone and they just open it. This makes those artifacts polished instead of improvised.",
+      worksWith: [
+        { name: "frontend-design", note: "Brings the design taste; html brings the packaging." },
+        { name: "webapp-testing", note: "Renders the artifact and checks it actually looks right." },
+      ],
+      example:
+        "Say “turn this CSV into a one-file dashboard I can send to my team” — you get a polished HTML file that works offline, on anyone's machine.",
+      home: "agr-launchpad",
+      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/html/SKILL.md",
+      zipUrl: "downloads/skills/html.zip",
+    },
+    {
+      name: "webapp-testing",
+      marker: "Verification",
+      theme: "Frontend & verification",
+      surfaces: ["code"],
+      author: { name: "Anthropic", url: "https://github.com/anthropics", self: false },
+      origin: { label: "anthropics/skills", url: "https://github.com/anthropics/skills" },
+      description: "Claude drives a real browser with Playwright — screenshots, console logs, clicks — and verifies UI before claiming “done.”",
+      what:
+        "A toolkit that lets Claude open your local web app in a real browser: take screenshots, read console errors, click through flows. UI work gets verified by looking, not by assuming.",
+      why:
+        "“It should work now” is the most expensive sentence in frontend development. This replaces it with evidence — Claude sees the rendered page before reporting back.",
+      worksWith: [
+        { name: "frontend-patterns", note: "Build the UI, then prove it renders and behaves." },
+        { name: "frontend-design", note: "Design intent, visually confirmed." },
+      ],
+      example:
+        "Say “check that the signup form works” and Claude launches the page, fills the form, screenshots the result, and reports what it saw.",
+      home: "agr-launchpad",
+      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/webapp-testing/SKILL.md",
+      zipUrl: "downloads/skills/webapp-testing.zip",
+    },
+    {
+      name: "secure-coding",
+      marker: "Security",
+      theme: "Security",
+      surfaces: ["code"],
+      author: { name: "ECC community", url: "https://github.com/affaan-m/ECC", self: false },
+      origin: { label: "affaan-m/ECC", url: "https://github.com/affaan-m/ECC" },
+      description: "Security guidance applied while code is written — auth, user input, secrets, payments — not after.",
+      what:
+        "Proactive secure-coding patterns Claude applies during the work: handling user input, authentication flows, secrets management, sensitive endpoints. Complements (not replaces) a retrospective audit.",
+      why:
+        "Security bolted on at the end is security full of gaps. Catching an injection risk while the line is being written costs seconds; catching it in production costs much more.",
+      worksWith: [
+        { name: "backend-patterns", note: "The server side is where the sensitive surface lives." },
+        { name: "code-review", note: "Write safely, then audit the diff before merging." },
+      ],
+      example:
+        "Add a login endpoint and the skill quietly enforces the boring-but-vital parts: hashing, rate limits, safe error messages, no secrets in logs.",
+      home: "agr-launchpad",
+      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/secure-coding/SKILL.md",
+      zipUrl: "downloads/skills/secure-coding.zip",
+    },
+    {
+      name: "skill-stocktake",
+      marker: "Meta",
+      theme: "Skill housekeeping",
+      surfaces: ["code"],
+      author: { name: "ECC community", url: "https://github.com/affaan-m/ECC", self: false },
+      origin: { label: "affaan-m/ECC", url: "https://github.com/affaan-m/ECC" },
+      description: "Audits your installed skills for quality and overlap — the skill that keeps the other skills honest.",
+      what:
+        "An inventory-and-audit skill: it scans the skills you've accumulated, scores their quality, and flags overlap, staleness, and broken references. Quick Scan for recent changes, Full Stocktake for everything.",
+      why:
+        "Skill collections grow messy quietly — duplicates, contradictions, dead links. A periodic stocktake keeps your toolkit sharp instead of sprawling.",
+      worksWith: [
+        { name: "skill-creator", note: "One mints new skills; the other audits the collection." },
+      ],
+      example:
+        "Run a stocktake after a month of collecting skills — you'll learn which ones overlap, which are stale, and which quietly broke.",
+      home: "agr-launchpad",
+      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/skill-stocktake/SKILL.md",
+      zipUrl: "downloads/skills/skill-stocktake.zip",
     },
     {
       name: "caveman",
@@ -308,6 +526,28 @@ window.AGR_CATALOG = {
       repoUrl: "https://github.com/anthropics/claude-plugins-official",
     },
     {
+      name: "code-review",
+      marker: "Quality",
+      theme: "Quality & review",
+      surfaces: ["code"],
+      author: { name: "Anthropic", url: "https://github.com/anthropics", self: false },
+      origin: { label: "anthropics/claude-plugins-official", url: "https://github.com/anthropics/claude-plugins-official" },
+      description: "Reviews your changes for bugs and cleanups before you merge — with an ultra mode that runs a deep multi-agent pass in the cloud.",
+      what:
+        "A review plugin for Claude Code: /code-review inspects your current diff for correctness bugs and simplification opportunities, at the effort level you choose. /code-review ultra escalates to a multi-agent cloud review of the whole branch.",
+      why:
+        "A second pair of eyes on every diff, on demand. The cheap pass catches the obvious; the ultra pass catches what individual reviews miss — before it reaches your teammates or production.",
+      worksWith: [
+        { name: "secure-coding", note: "Write safely while building, audit the diff before merging." },
+        { name: "superpowers", note: "Disciplined building plus a final quality gate." },
+      ],
+      example:
+        "Finish a feature and run /code-review — you get severity-ranked findings on your branch. Add “ultra” when the change is big enough to deserve a deep pass.",
+      visibility: "public",
+      installSteps: ["/plugin install code-review@claude-plugins-official"],
+      repoUrl: "https://github.com/anthropics/claude-plugins-official",
+    },
+    {
       name: "context-mode",
       marker: "Focus",
       theme: "Memory & focus",
@@ -354,6 +594,75 @@ window.AGR_CATALOG = {
         "/plugin install claude-mem",
       ],
       repoUrl: "https://github.com/thedotmack/claude-mem",
+    },
+  ],
+
+  // Agents — focused subagents Claude Code dispatches for a job. All three
+  // ship inside agr-launchpad (.claude/agents/), so cloning the launchpad
+  // installs them; no separate download needed.
+  agents: [
+    {
+      name: "architect",
+      marker: "System design",
+      theme: "Design & exploration",
+      surfaces: ["code"],
+      author: { name: "ECC community", url: "https://github.com/affaan-m/ECC", self: false },
+      origin: { label: "affaan-m/ECC", url: "https://github.com/affaan-m/ECC" },
+      description: "System-level architecture specialist — greenfield design, stack selection, scalability reviews, decisions recorded as ADRs.",
+      what:
+        "A subagent for SYSTEM questions: which stack, how services fit together, will this scale, which database. It weighs trade-offs and records the decision as an architecture decision record (ADR), so the “why” survives.",
+      why:
+        "Architecture mistakes are the expensive kind — they surface months later. A dedicated specialist that thinks only about the system level catches them while they're still cheap.",
+      worksWith: [
+        { name: "code-architect", note: "architect decides the system; code-architect blueprints each feature inside it." },
+        { name: "grill-me", note: "Get grilled on the plan, then let the architect formalize it." },
+      ],
+      example:
+        "Ask “should this be one service or three, and which database fits?” — the architect weighs the trade-offs and writes the decision down as an ADR.",
+      home: "agr-launchpad",
+      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/agents/architect.md",
+    },
+    {
+      name: "code-architect",
+      marker: "Feature blueprints",
+      theme: "Design & exploration",
+      surfaces: ["code"],
+      author: { name: "ECC community", url: "https://github.com/affaan-m/ECC", self: false },
+      origin: { label: "affaan-m/ECC", url: "https://github.com/affaan-m/ECC" },
+      description: "Designs one feature inside an existing codebase — concrete files, interfaces, data flow, and build order.",
+      what:
+        "A subagent that studies your codebase's existing patterns and conventions, then hands back an implementation blueprint for a single feature: which files, which interfaces, what data flow, in what order to build.",
+      why:
+        "Features built without a blueprint fight the codebase instead of fitting it. This one reads how your project already works and designs the feature to belong.",
+      worksWith: [
+        { name: "code-explorer", note: "Explore what exists first; blueprint what's next second." },
+        { name: "architect", note: "The system-level counterpart, for decisions bigger than one feature." },
+      ],
+      example:
+        "Say “plan how to add CSV export to the reports page” — you get a concrete blueprint matched to your codebase's conventions, ready to execute.",
+      home: "agr-launchpad",
+      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/agents/code-architect.md",
+    },
+    {
+      name: "code-explorer",
+      marker: "Code tracing",
+      theme: "Design & exploration",
+      surfaces: ["code"],
+      author: { name: "ECC community", url: "https://github.com/affaan-m/ECC", self: false },
+      origin: { label: "affaan-m/ECC", url: "https://github.com/affaan-m/ECC" },
+      description: "Traces how an existing feature actually works — execution paths, architecture layers, dependencies.",
+      what:
+        "A read-only subagent that deep-dives an existing feature: follows the execution path end to end, maps the layers it crosses, and documents the dependencies — so new work starts from understanding, not guessing.",
+      why:
+        "Most bugs in changes to old code come from not knowing what the old code really does. An explorer that traces first makes every change after it safer.",
+      worksWith: [
+        { name: "code-architect", note: "The natural pipeline: explore the existing, then blueprint the new." },
+        { name: "code-tour", note: "Turn what the explorer found into a playable walkthrough." },
+      ],
+      example:
+        "Ask “how does authentication actually flow through this app?” — you get the traced path, layer by layer, with the files involved.",
+      home: "agr-launchpad",
+      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/agents/code-explorer.md",
     },
   ],
 

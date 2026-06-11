@@ -249,13 +249,29 @@ code {
   font-weight: 700; margin: 22px 0 14px;
 }
 .lp-group-label__sub { color: var(--ink-2); font-weight: 600; text-transform: none; letter-spacing: 0; }
-.lp-pieces { margin-bottom: 6px; }
 
-.piece__top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
-.piece__by { font-size: 12px; color: var(--ink-2); font-weight: 600; white-space: nowrap; }
-.piece__name { font-family: var(--serif); font-weight: 700; font-size: 20px; margin: 2px 0 10px; color: var(--ink); }
-.piece .card__desc { font-size: 14.5px; margin-bottom: 0; }
-.piece:hover { transform: translateY(-2px); }
+/* the pieces, as a reading index — deliberately not cards, so they don't
+   compete with the clickable catalog sections below */
+.lp-list { list-style: none; margin: 0 0 8px; padding: 0; border-top: 1px solid var(--line); }
+.lp-row {
+  display: grid; grid-template-columns: 190px 1fr 150px; gap: 4px 28px;
+  align-items: baseline; padding: 15px 4px; border-bottom: 1px dashed var(--line);
+}
+.lp-row__name { font-family: var(--serif); font-weight: 700; font-size: 17.5px; color: var(--ink); }
+.lp-row__marker {
+  display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--terracotta); margin-bottom: 3px;
+}
+.lp-row__body { color: var(--ink-2); font-size: 14.5px; line-height: 1.55; }
+.lp-row__body code { font-size: 13px; }
+.lp-row__by { font-size: 12.5px; color: var(--ink-2); font-weight: 600; white-space: nowrap; justify-self: end; }
+@media (max-width: 720px) {
+  .lp-row { grid-template-columns: 1fr; gap: 6px; }
+  .lp-row__by { justify-self: start; }
+}
+.lp-inrepo { max-width: 76ch; color: var(--ink-2); font-size: 15px; line-height: 1.65; margin: 0; }
+.lp-inrepo strong { color: var(--aegean); }
+.lp-inrepo a { color: var(--aegean); font-weight: 600; }
 
 .lp-note {
   margin-top: clamp(40px, 5vw, 64px);
@@ -276,13 +292,19 @@ code {
 .badge--private { background: rgba(93,86,72,.1); color: var(--ink-2); }
 .badge--ships { background: rgba(91,164,212,.18); color: #2f6f9e; }
 
-/* ---------- section rhythm (all sections carry equal weight) ----------
-   A constrained hairline between sections, drawn at the top of each
-   section's inner column so the four sections read as equals. */
-.launchpad .section__in,
+/* ---------- section rhythm ----------
+   The launchpad is its own zone: a warm full-width band with a hard edge,
+   visibly separate from the catalog sections (skills / agents / plugins /
+   projects), which read as equals divided by constrained hairlines. */
+.launchpad {
+  background: linear-gradient(180deg, #f8f2e2 0%, #fdfaf2 100%);
+  border-bottom: 1px solid var(--limestone);
+}
 #skills .section__in,
+.agents .section__in,
 .plugins .section__in,
 .projects .section__in { border-top: 1px solid var(--line); padding-top: clamp(56px, 7vw, 96px); }
+#skills .section__in { border-top: none; padding-top: clamp(40px, 5vw, 64px); }
 .launchpad .section__in { border-top: none; padding-top: 0; }
 
 /* ---------- grids / cards ---------- */
@@ -300,6 +322,7 @@ code {
 .card--link:hover .card__link { color: var(--terracotta); }
 .card--link:hover .card__name { color: var(--aegean); }
 .card__top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.card__badges { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
 .card__marker {
   font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
   color: var(--terracotta);
@@ -456,7 +479,7 @@ code {
 .groups > .grid + .lp-group-label { margin-top: 36px; }
 
 /* ---------- landing: quick index ---------- */
-.qi__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.qi__cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 28px; }
 .qi__h {
   font-family: var(--serif); font-weight: 600; font-size: 18px; color: var(--ink);
   display: flex; align-items: baseline; gap: 10px; margin: 0 0 14px;
