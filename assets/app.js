@@ -140,7 +140,8 @@
     }
     var srcUrl = a.url || a.repoUrl;
     if (srcUrl) {
-      var v = el("a", "btn btn--line btn--sm", "View source on GitHub ↗");
+      var v = el("a", "btn btn--line btn--sm",
+        /github\.com/.test(srcUrl) ? "View source on GitHub ↗" : "View the source ↗");
       v.href = srcUrl; v.target = "_blank"; v.rel = "noopener";
       actions.appendChild(v);
     }
@@ -253,6 +254,7 @@
   }
 
   function agentCard(a) {
+    if (a.type === "guide") return skillCard(a);
     var card = el("article", "card");
     var top = el("div", "card__top");
     top.appendChild(el("span", "card__marker", esc(a.marker || "Agent")));
@@ -266,6 +268,7 @@
   }
 
   function pluginCard(p) {
+    if (p.type === "guide") return skillCard(p);
     var card = el("article", "card");
     var top = el("div", "card__top");
     top.appendChild(el("span", "card__marker", esc(p.marker || "Plugin")));

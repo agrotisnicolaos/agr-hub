@@ -109,67 +109,51 @@ window.AGR_CATALOG = {
       url: "https://github.com/anthropics/skills",
     },
     {
-      name: "how-to-install-plugins",
-      title: "How to install plugins",
+      name: "how-to-install-skills",
+      title: "How to install skills",
       type: "guide",
       marker: "Start here",
       theme: "Getting started",
       surfaces: ["code"],
       author: { name: "Nicolas Agrotis", self: true },
       description:
-        "Install any plugin from your terminal in under a minute — official marketplace, community marketplaces, and npm tools, step by step.",
+        "Add any skill on this page to Claude Code in under a minute — per project or machine-wide — following Anthropic's skill layout.",
       what:
-        "Plugins extend Claude Code with skills, agents, and tools. This guide shows the three ways they install — all from your terminal — and how to remove them again.",
+        "A skill is a folder with a SKILL.md file that teaches Claude Code how to do a specific job well. Anthropic's convention: project skills live in .claude/skills/ inside your repo, personal skills in ~/.claude/skills/. This guide covers installing, using, and removing them.",
       why:
-        "Every plugin tile on this page shows its install commands. Read this once and those commands will make sense forever — or skip it all by starting from the launchpad, which ships with the whole set pre-wired.",
+        "Every skill card on this page comes with a one-click ZIP. Once you know where the folder goes, installing any of them takes thirty seconds — and the launchpad skips even that, shipping with all eleven pre-installed.",
       worksWith: [
-        { name: "agr-launchpad", note: "The shortcut: clone it and every plugin below is already configured." },
+        { name: "agr-launchpad", note: "The shortcut: clone it and every launchpad skill below is already in place." },
+        { name: "skill-stocktake", note: "Audits your collection once the skills start piling up." },
       ],
       guideSections: [
         {
-          title: "Before you start",
+          title: "Where skills live (Anthropic's layout)",
           steps: [
-            "Install Claude Code if you haven't: npm install -g @anthropic-ai/claude-code",
-            "Open a terminal in your project folder and run: claude",
-            "Everything below is typed inside Claude Code at the prompt.",
+            "A skill is a folder containing a SKILL.md file — the folder name is the skill's name.",
+            "Project skills go in .claude/skills/<name>/ inside your repo: available whenever Claude Code runs there, and shared with teammates through git.",
+            "Personal skills go in ~/.claude/skills/<name>/: available in every project on your machine.",
           ],
         },
         {
-          title: "Install from the official marketplace",
+          title: "Install a skill from this hub",
           steps: [
-            "Anthropic's marketplace is built in — one command installs a plugin:",
-            "/plugin install superpowers@claude-plugins-official",
-            "Same pattern for the rest: /plugin install skill-creator@claude-plugins-official, /plugin install frontend-design@claude-plugins-official",
-            "Restart Claude Code when prompted; the plugin's commands and skills are now available.",
+            "Press “Download ZIP” on any skill card — the zip contains the skill folder, ready to drop in.",
+            "Unzip it into your project's skills folder: unzip grill-me.zip -d .claude/skills/",
+            "Want it everywhere instead? Unzip into ~/.claude/skills/",
+            "Start a new Claude Code session in the project — skills are discovered automatically.",
+            "Then just describe your task; Claude reaches for the skill when it fits. You can also invoke one directly: “use the grill-me skill on this plan.”",
           ],
         },
         {
-          title: "Install from a community marketplace",
+          title: "Remove a skill",
           steps: [
-            "Some plugins live in their author's own marketplace. Add the marketplace first:",
-            "/plugin marketplace add mksglu/context-mode",
-            "Then install from it: /plugin install context-mode@context-mode",
-            "Same two-step pattern for claude-mem: /plugin marketplace add thedotmack/claude-mem, then /plugin install claude-mem",
-          ],
-        },
-        {
-          title: "Install npm-based tools",
-          steps: [
-            "A few tools install with npx instead of /plugin — get-shit-done is one:",
-            "npx get-shit-done-cc --claude --global   (run this in your terminal, not inside Claude Code)",
-            "Its /gsd-* commands appear in Claude Code right away.",
-          ],
-        },
-        {
-          title: "Remove a plugin",
-          steps: [
-            "/plugin uninstall <name> removes a plugin.",
-            "/plugin marketplace remove <name> removes a marketplace you no longer use.",
+            "Delete the skill's folder from .claude/skills/ (or ~/.claude/skills/). Next session, it's gone.",
           ],
         },
       ],
-      origin: { label: "anthropics/claude-plugins-official", url: "https://github.com/anthropics/claude-plugins-official" },
-      url: "https://github.com/anthropics/claude-plugins-official",
+      origin: { label: "anthropics/skills", url: "https://github.com/anthropics/skills" },
+      url: "https://github.com/anthropics/skills",
     },
     {
       name: "grill-me",
@@ -440,6 +424,69 @@ window.AGR_CATALOG = {
   // installSteps run in order; multi-step installs add a marketplace first.
   plugins: [
     {
+      name: "how-to-install-plugins",
+      title: "How to install plugins",
+      type: "guide",
+      marker: "Start here",
+      theme: "Getting started",
+      surfaces: ["code"],
+      author: { name: "Nicolas Agrotis", self: true },
+      description:
+        "Install any plugin from your terminal in under a minute — official marketplace, community marketplaces, and npm tools, step by step.",
+      what:
+        "Plugins extend Claude Code with skills, agents, and tools. This guide shows the three ways they install — all from your terminal — and how to remove them again.",
+      why:
+        "Every plugin tile on this page shows its install commands. Read this once and those commands will make sense forever — or skip it all by starting from the launchpad, which ships with the whole set pre-wired.",
+      worksWith: [
+        { name: "agr-launchpad", note: "The shortcut: clone it and every plugin below is already configured." },
+      ],
+      guideSections: [
+        {
+          title: "Before you start",
+          steps: [
+            "Install Claude Code if you haven't: npm install -g @anthropic-ai/claude-code",
+            "Open a terminal in your project folder and run: claude",
+            "Everything below is typed inside Claude Code at the prompt.",
+          ],
+        },
+        {
+          title: "Install from the official marketplace",
+          steps: [
+            "Anthropic's marketplace is built in — one command installs a plugin:",
+            "/plugin install superpowers@claude-plugins-official",
+            "Same pattern for the rest: /plugin install skill-creator@claude-plugins-official, /plugin install frontend-design@claude-plugins-official",
+            "Restart Claude Code when prompted; the plugin's commands and skills are now available.",
+          ],
+        },
+        {
+          title: "Install from a community marketplace",
+          steps: [
+            "Some plugins live in their author's own marketplace. Add the marketplace first:",
+            "/plugin marketplace add mksglu/context-mode",
+            "Then install from it: /plugin install context-mode@context-mode",
+            "Same two-step pattern for claude-mem: /plugin marketplace add thedotmack/claude-mem, then /plugin install claude-mem",
+          ],
+        },
+        {
+          title: "Install npm-based tools",
+          steps: [
+            "A few tools install with npx instead of /plugin — get-shit-done is one:",
+            "npx get-shit-done-cc --claude --global   (run this in your terminal, not inside Claude Code)",
+            "Its /gsd-* commands appear in Claude Code right away.",
+          ],
+        },
+        {
+          title: "Remove a plugin",
+          steps: [
+            "/plugin uninstall <name> removes a plugin.",
+            "/plugin marketplace remove <name> removes a marketplace you no longer use.",
+          ],
+        },
+      ],
+      origin: { label: "anthropics/claude-plugins-official", url: "https://github.com/anthropics/claude-plugins-official" },
+      url: "https://github.com/anthropics/claude-plugins-official",
+    },
+    {
       name: "superpowers",
       marker: "Workflow engine",
       theme: "Workflow & discipline",
@@ -601,6 +648,60 @@ window.AGR_CATALOG = {
   // ship inside agr-launchpad (.claude/agents/), so cloning the launchpad
   // installs them; no separate download needed.
   agents: [
+    {
+      name: "how-to-install-agents",
+      title: "How to install agents",
+      type: "guide",
+      marker: "Start here",
+      theme: "Getting started",
+      surfaces: ["code"],
+      author: { name: "Nicolas Agrotis", self: true },
+      description:
+        "Add a subagent to Claude Code — one Markdown file in the right folder, or the built-in /agents command — following Anthropic's subagent conventions.",
+      what:
+        "Agents (Anthropic calls them subagents) are single Markdown files with a small frontmatter header — name, description, allowed tools — followed by the agent's instructions. Anthropic's convention: project agents live in .claude/agents/, personal agents in ~/.claude/agents/.",
+      why:
+        "The three agents below ship inside the launchpad, so cloning it installs them. But knowing the convention means you can install an agent from anywhere — or write your own in minutes with /agents.",
+      worksWith: [
+        { name: "agr-launchpad", note: "Clone it and architect, code-architect, and code-explorer arrive pre-installed." },
+        { name: "how-to-install-plugins", note: "Plugins are the other way agents arrive — many bundle their own." },
+      ],
+      guideSections: [
+        {
+          title: "Where agents live (Anthropic's layout)",
+          steps: [
+            "An agent is a single .md file: YAML frontmatter (name, description, optional tools and model) followed by its system prompt.",
+            "Project agents go in .claude/agents/<name>.md — available in that repo, shared with teammates through git.",
+            "Personal agents go in ~/.claude/agents/<name>.md — available in every project. When names clash, the project version wins.",
+          ],
+        },
+        {
+          title: "Install an agent from this hub",
+          steps: [
+            "Easiest: clone the launchpad — all three agents below are already in its .claude/agents/ folder.",
+            "Manual: open an agent card below, click “View source”, and save the .md file into your project's .claude/agents/ folder.",
+            "Start a new Claude Code session — agents are discovered automatically.",
+          ],
+        },
+        {
+          title: "Manage them with /agents",
+          steps: [
+            "Inside Claude Code, run /agents — Anthropic's built-in interface for viewing, creating, and editing subagents.",
+            "It walks you through writing new ones too: describe the job, pick the tools it may use, done.",
+          ],
+        },
+        {
+          title: "Use (or remove) an agent",
+          steps: [
+            "Claude dispatches an agent automatically when a task matches its description.",
+            "Or ask explicitly: “Use the code-explorer agent to map how authentication works.”",
+            "To remove one, delete its .md file — or do it from /agents.",
+          ],
+        },
+      ],
+      origin: { label: "Claude Code subagents (Anthropic docs)", url: "https://docs.claude.com/en/docs/claude-code/sub-agents" },
+      url: "https://docs.claude.com/en/docs/claude-code/sub-agents",
+    },
     {
       name: "architect",
       marker: "System design",
