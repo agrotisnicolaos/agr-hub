@@ -6,94 +6,61 @@ read this.
 ## The model
 
 - **agr-hub** (this repo) is **public**. It is two things at once:
-  1. a **website** (GitHub Pages, served from `index.html`) — the human-facing hub, and
+  1. a **website** (GitHub Pages) — the human-facing hub, split into a landing page
+     (`index.html`), a no-code page (`chat.html`), a builders page (`code.html`), and docs
+     (`docs.html`), and
   2. a **Claude Code marketplace** (`.claude-plugin/marketplace.json`) — the machine-readable catalog
-     that `/plugin install …@agr-hub` reads.
+     that `/plugin install …@agr-hub` reads (for your own future packs/plugins).
 - **agr-launchpad** is the public base everyone clones.
-- **Each pack and each project lives in its OWN repo**, private by default. The hub only *references*
-  them. They become installable/clonable when you flip them public.
-
-Why separate repos? agr-hub is public — anything inside it is public. Keeping packs/projects in their
-own repos lets them stay private until you're ready, then go public with one switch.
+- Projects live in their **own repos**, private by default. The hub only *references* them.
 
 ## The website is data-driven
 
-The site renders from [`data/catalog.js`](data/catalog.js). To change what appears, edit that file,
-commit, and push — GitHub Pages redeploys automatically. No build step.
+The site renders from [`data/catalog.js`](data/catalog.js): `skills`, `plugins`, and `projects`
+arrays. Edit, commit, push — GitHub Pages redeploys. No build step.
 
-Each entry has a `visibility`:
-- `"public"` → the card shows actions (install / view / download / clone).
-- `"private"` → the card shows an **"in dev"** badge and no actions (a roadmap teaser; safe to omit
-  entirely if you don't want to hint at it).
+Key fields per asset (see the comment block at the top of catalog.js for the full list):
 
-## Add a PACK (a project-specific bundle of skills/agents/tools)
+- `surfaces: ["chat","code"]` — which page(s) the card appears on. Skills that work in claude.ai
+  AND Claude Code carry both.
+- `theme` — the thematic group heading the card renders under ("Getting started", "Think & plan",
+  "Workflow & discipline", …). New themes appear automatically, in catalog order.
+- `author { name, self }` — `self: true` renders a "by Nicolas" tag; otherwise the maker's name.
+- `origin { label, url }` — credit line in the pop-out tile: "first conceived in <repo>".
+- `what / why / worksWith / example` — the four plain-language sections of the pop-out tile.
+- `zipUrl` — the Download button. For skills this points at `downloads/skills/<name>.zip`.
+- `installSteps` (plugins) — terminal commands shown on the card and in the tile, in order.
+- `visibility: "private"` → "in dev" badge, no actions.
 
-A pack is a normal Claude Code **plugin**. Recommended repo name: `agr-pack-<name>`.
+## Add a SKILL
 
-1. **Create the pack repo (private):**
-   ```
-   agr-pack-ml/
-     .claude-plugin/plugin.json     # name, version, description
-     skills/<skill>/SKILL.md
-     agents/<agent>.md
-     .mcp.json                      # optional: MCP servers the pack needs
-     commands/                      # optional: slash commands
-     README.md
-   ```
-   (The launchpad's `packs/_template` is a good starting shape; a plugin just needs
-   `.claude-plugin/plugin.json` at its root.)
+1. Put the skill folder (with `SKILL.md`) in `agr-launchpad/.claude/skills/` — or anywhere local.
+2. Rebuild the download ZIPs: `make skill-zips` (reads `../agr-launchpad` by default; pass another
+   dir as the first arg to `scripts/build-skill-zips.sh`). Third-party skills from other repos:
+   clone them and zip the skill folder into `downloads/skills/<name>.zip` the same way.
+3. Add a card to the `skills` array with `surfaces`, `theme`, the four tile sections, `zipUrl`,
+   and — if it came from someone else — `author` + `origin` credit.
+4. Commit the catalog change AND the new zip. Push.
 
-2. **Test it locally before anyone sees it:**
-   ```
-   /plugin marketplace add /absolute/path/to/agr-pack-ml   # directory source
-   /plugin install ml@<local-marketplace>
-   ```
-   Or point a scratch marketplace at the folder. Iterate until it's good.
+## Add a PLUGIN (recommendation card for a Claude Code plugin)
 
-3. **Show it as "in dev" (optional):** add a card to the `packs` array in `data/catalog.js` with
-   `visibility: "private"`. Push. It appears on the site with an "in dev" badge, no actions.
+Plugins are *recommendations with install commands* — the code lives in the maker's repo.
 
-4. **Publish when ready:**
-   - Make the `agr-pack-ml` repo **public**.
-   - Add it to [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json):
-     ```json
-     {
-       "name": "ml",
-       "source": { "source": "github", "repo": "agrotisnicolaos/agr-pack-ml" },
-       "description": "Data & ML pack: notebooks, evals, ML-review agents."
-     }
-     ```
-   - Flip the catalog card to `visibility: "public"` and set its `repoUrl` (+ optional `install`).
-   - Commit + push agr-hub.
+1. Add a card to the `plugins` array: `installSteps` (one or more commands, run in order),
+   `repoUrl`, `author`/`origin` credit, theme, and the four tile sections.
+2. Push. The card shows each command as a click-to-copy row.
 
-5. **Tell your friends.** They run:
-   ```
-   /plugin marketplace add agrotisnicolaos/agr-hub   # one time
-   /plugin install ml@agr-hub
-   ```
-   Updates later: `/plugin update ml@agr-hub`.
-
-## Add a PROJECT (any other repo you want to showcase)
+## Add a PROJECT (any repo you want to showcase)
 
 1. Create or pick the project repo (private or public).
-2. Add a card to the `projects` array in `data/catalog.js`:
-   ```js
-   {
-     name: "my-project",
-     marker: "Web app",
-     description: "What it does, in a sentence or two.",
-     visibility: "public",
-     repoUrl: "https://github.com/agrotisnicolaos/my-project",
-     zipUrl: "https://github.com/agrotisnicolaos/my-project/archive/refs/heads/main.zip"
-   }
-   ```
-3. Push. The card appears with Download ZIP / View / clone actions (public) or an "in dev" badge
-   (private).
+2. Add a card to the `projects` array with `repoUrl`, `zipUrl`
+   (`https://github.com/<you>/<repo>/archive/refs/heads/main.zip`), `theme`, highlights, links,
+   and the four tile sections.
+3. Push. Public cards get Download ZIP / View / clone actions; private ones get an "in dev" badge.
 
-> Tip: the `zipUrl` branch is usually `main` — match whatever the repo's default branch is.
+> Tip: the `zipUrl` branch is usually `main` — match the repo's default branch.
 
 ## Future (not built yet)
 
-The footer hints at what's coming: an about/vision section, per-project write-ups, media, and a way
-to react/discuss. Those are deliberately out of scope for now — the catalog + cards are the
-foundation they'll hang off.
+Per-project write-ups, media, and a way to react/discuss. The catalog + tiles are the foundation
+they'll hang off.

@@ -281,7 +281,7 @@ code {
    section's inner column so the four sections read as equals. */
 .launchpad .section__in,
 #skills .section__in,
-.packs .section__in,
+.plugins .section__in,
 .projects .section__in { border-top: 1px solid var(--line); padding-top: clamp(56px, 7vw, 96px); }
 .launchpad .section__in { border-top: none; padding-top: 0; }
 
@@ -435,11 +435,25 @@ code {
 .door__cta { margin-top: auto; color: var(--aegean); font-weight: 700; font-size: 15.5px; }
 .door:hover .door__cta { color: var(--terracotta); }
 
-/* ---------- landing: how it works ---------- */
-.how .section__in, .qi .section__in { border-top: 1px solid var(--line); padding-top: clamp(56px, 7vw, 96px); }
-.how__note { margin-top: clamp(32px, 4vw, 48px); }
+/* ---------- landing: how it works / get started ---------- */
+.how .section__in, .qi .section__in, .starts .section__in { border-top: 1px solid var(--line); padding-top: clamp(56px, 7vw, 96px); }
 .how__grid .card__name { font-size: 22px; }
 .how__grid .card__desc { margin-bottom: 0; }
+.door--start { padding: 28px 28px 26px; }
+.door--start .door__name { font-size: 25px; margin-bottom: 8px; }
+.door__actions { margin-top: auto; display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* equal-weight hero pair (landing) */
+.btn--hero {
+  background: rgba(248,246,241,.95); color: var(--aegean);
+  border-color: rgba(248,246,241,.95); box-shadow: 0 6px 18px rgba(10,25,60,.22);
+}
+.btn--hero:hover { background: #fff; color: var(--aegean-dk); transform: translateY(-2px); }
+.btn__ico { font-size: 17px; line-height: 1; }
+
+/* ---------- themed groups inside catalog sections ---------- */
+.groups > .lp-group-label:first-child { margin-top: 0; }
+.groups > .grid + .lp-group-label { margin-top: 36px; }
 
 /* ---------- landing: quick index ---------- */
 .qi__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
@@ -508,6 +522,9 @@ code {
 .tile__credit a { font-weight: 700; }
 .tile__actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 4px; }
 .tile .clone { margin-top: 12px; }
+.tile__install { display: flex; flex-direction: column; gap: 0; }
+.tile__install .clone { margin-top: 0; }
+.tile__install .clone + .clone { margin-top: 10px; }
 .tile__section { margin-top: 24px; }
 .tile__h {
   font-family: var(--serif); font-weight: 700; font-size: 18px; color: var(--aegean);

@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Code — agr·hub</title>
-<meta name="description" content="A launchpad for building with Claude Code — a batteries-included starter kit, individual skills, a marketplace of project packs, and a showcase of projects." />
+<meta name="description" content="A launchpad for building with Claude Code — a batteries-included starter kit, individual skills, hand-picked plugins, and a showcase of projects." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -37,7 +37,7 @@
         <div class="nav__menu">
           <a href="#launchpad">Launchpad</a>
           <a href="#skills">Skills</a>
-          <a href="#packs">Packs</a>
+          <a href="#plugins">Plugins</a>
           <a href="#projects">Projects</a>
           <a href="docs.html">Docs</a>
         </div>
@@ -54,16 +54,17 @@
   <section class="hero hero--sub" id="top">
     <div class="hero__glow" aria-hidden="true"></div>
     <div class="hero__in">
-      <p class="eyebrow reveal">A launchpad for building with Claude Code</p>
       <h1 class="hero__title reveal">
         Let's start building <em>together.</em>
       </h1>
       <p class="hero__lede reveal">
-        Start from a solid, versatile base. Add project-specific power when you need it.
-        One home for the launchpad, a marketplace of packs, and the things I build.
+        Everything on this side of the hub serves one goal: getting you from idea to working
+        software with Claude Code — without rebuilding your setup every time. Start from the
+        launchpad, a base that already works. Then layer on plugins, skills, and projects from
+        this hub as your work gets more specialized.
       </p>
       <div class="hero__cta reveal">
-        <a class="btn btn--primary" href="#launchpad">Get the launchpad</a>
+        <a class="btn btn--primary" href="#launchpad">Start with the launchpad</a>
         <a class="btn btn--ghost" href="#skills">Explore the catalog</a>
       </div>
     </div>
@@ -75,7 +76,7 @@
     <div class="section__in">
       <div class="split">
         <div class="split__lead">
-          <p class="kicker"><span class="kicker__bar"></span>The base</p>
+          <p class="kicker"><span class="kicker__bar"></span>Your starting point</p>
           <h2 class="h2">agr-launchpad</h2>
           <p class="lead">
             Instead of starting every project from an empty folder, you start from here — a curated,
@@ -83,8 +84,10 @@
             It is the <em>starting place</em> for anything you want to build.
           </p>
           <p class="lead muted">
-            Clone it once. Trust the folder. Approve a few prompts. Then just describe what you want
-            to make. When you start a particular kind of project, layer on a pack.
+            It gives you the freedom to create however you like — and the flexibility to grow:
+            any asset on this hub drops straight on top when your project needs something more
+            specialized. Clone it once, trust the folder, approve a few prompts, then just
+            describe what you want to make.
           </p>
         </div>
         <aside class="panel" aria-label="agr-launchpad details">
@@ -178,8 +181,8 @@
       <div class="lp-note">
         <p>
           <strong>Simple by design.</strong> The base stays deliberately small so it's yours to shape —
-          swap pieces, add your own skills, tune the rulebook. And it's built to grow: every pack and
-          skill under development here in <strong>agr·hub</strong> is made to drop straight onto this
+          swap pieces, add your own skills, tune the rulebook. And it's built to grow: every plugin
+          and skill shared here in <strong>agr·hub</strong> is made to drop straight onto this
           launchpad.
         </p>
         <a class="btn btn--primary lp-deepdive" href="docs.html#launchpad">Deep dive into the launchpad →</a>
@@ -199,23 +202,24 @@
           the source repo, and a one-click ZIP. Skills tagged for chat work on claude.ai too.
         </p>
       </header>
-      <div class="grid" id="code-skills-grid"><!-- rendered from data/catalog.js --></div>
+      <div class="groups" id="code-skills-grid"><!-- rendered from data/catalog.js --></div>
     </div>
   </section>
 
-  <!-- PACKS -->
-  <section class="section packs" id="packs">
+  <!-- PLUGINS -->
+  <section class="section plugins" id="plugins">
     <div class="section__in">
       <header class="section__head">
-        <p class="kicker"><span class="kicker__bar"></span>The marketplace</p>
-        <h2 class="h2">Packs</h2>
+        <p class="kicker"><span class="kicker__bar"></span>The power-ups</p>
+        <h2 class="h2">Plugins</h2>
         <p class="lead">
-          Project-specific bundles of skills, agents, and tools that layer onto the base. Install one
-          with <code>/plugin</code> when you start that kind of project — the launchpad already knows
-          this marketplace.
+          Hand-picked plugins that extend Claude Code — each one credited to its maker. Click a
+          card for what it is, why it's useful, and the exact install commands; most take a single
+          <code>/plugin</code> command. New to this? Start with the
+          <a href="#asset=how-to-install-plugins">how-to guide</a>.
         </p>
       </header>
-      <div class="grid" id="packs-grid"><!-- rendered from data/catalog.js --></div>
+      <div class="groups" id="plugins-grid"><!-- rendered from data/catalog.js --></div>
     </div>
   </section>
 
@@ -230,7 +234,7 @@
           More to come, with deeper write-ups along the way.
         </p>
       </header>
-      <div class="grid" id="projects-grid"><!-- rendered from data/catalog.js --></div>
+      <div class="groups" id="projects-grid"><!-- rendered from data/catalog.js --></div>
     </div>
   </section>
 
@@ -260,7 +264,7 @@
   <p class="foot__copy">© <span id="year"></span> Nicolas Agrotis</p>
 </footer>
 
-<script src="data/catalog.js"></script>
-<script src="assets/app.js"></script>
+<script src="data/catalog.js?v=3"></script>
+<script src="assets/app.js?v=3"></script>
 </body>
 </html>

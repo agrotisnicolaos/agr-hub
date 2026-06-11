@@ -2,7 +2,7 @@
    tiles, quick index, copy-to-clipboard. All content comes from data/catalog.js. */
 (function () {
   "use strict";
-  var C = window.AGR_CATALOG || { launchpad: {}, skills: [], packs: [], projects: [] };
+  var C = window.AGR_CATALOG || { launchpad: {}, skills: [], plugins: [], projects: [] };
 
   /* ---------- year ---------- */
   var y = document.getElementById("year");
@@ -51,7 +51,7 @@
   /* ---------- asset index (every asset by name) ---------- */
   var assetIndex = {};
   (C.skills || []).forEach(function (s) { assetIndex[s.name] = { item: s, type: "skill" }; });
-  (C.packs || []).forEach(function (p) { assetIndex[p.name] = { item: p, type: "pack" }; });
+  (C.plugins || []).forEach(function (p) { assetIndex[p.name] = { item: p, type: "plugin" }; });
   (C.projects || []).forEach(function (p) { assetIndex[p.name] = { item: p, type: "project" }; });
 
   function authorBadge(a) {
@@ -70,7 +70,8 @@
   }
 
   function displayName(a, type) {
-    if (a.type === "guide" || type === "project" || type === "pack") return a.name === "how-to-use-skills" ? "How to use skills" : a.name;
+    if (a.title) return a.title;
+    if (a.type === "guide" || type === "project" || type === "plugin") return a.name;
     return "/" + a.name;
   }
 
@@ -143,14 +144,18 @@
       actions.appendChild(v);
     }
     if (actions.childNodes.length) tile.appendChild(actions);
-    if (type === "pack" && a.visibility === "public") {
-      var cmd = a.install || ("/plugin install " + a.name + "@" + (C.marketplace || "agr-hub"));
-      var clone = el("button", "clone");
-      clone.type = "button";
-      clone.appendChild(el("code", null, esc(cmd)));
-      clone.appendChild(el("span", "clone__hint", "click to copy"));
-      copyBtn(clone, cmd);
-      tile.appendChild(clone);
+    if (type === "plugin" && a.installSteps && a.installSteps.length) {
+      var inst = el("div", "tile__install");
+      a.installSteps.forEach(function (cmd) {
+        var clone = el("button", "clone");
+        clone.type = "button";
+        clone.appendChild(el("code", null, esc(cmd)));
+        clone.appendChild(el("span", "clone__hint", "click to copy"));
+        copyBtn(clone, cmd);
+        inst.appendChild(clone);
+      });
+      tile.appendChild(modalSection(
+        a.installSteps.length > 1 ? "How to install (run in order)" : "How to install", inst));
     }
 
     /* the four sections */
@@ -246,25 +251,25 @@
     return card;
   }
 
-  function packCard(p) {
+  function pluginCard(p) {
     var card = el("article", "card");
     var top = el("div", "card__top");
-    top.appendChild(el("span", "card__marker", esc(p.marker || "Pack")));
-    top.appendChild(el("span", "badge badge--" + (p.visibility === "public" ? "public" : "private"),
-      p.visibility === "public" ? "public" : "in dev"));
+    top.appendChild(el("span", "card__marker", esc(p.marker || "Plugin")));
+    top.appendChild(authorBadge(p));
     card.appendChild(top);
     card.appendChild(el("h3", "card__name", esc(p.name)));
     card.appendChild(el("p", "card__desc", esc(p.description)));
 
     if (p.visibility === "public") {
       card.appendChild(el("span", "card__link", "What is it? Why useful? →"));
-      var cmd = p.install || ("/plugin install " + p.name + "@" + (C.marketplace || "agr-hub"));
-      var clone = el("button", "clone card__install");
-      clone.type = "button";
-      clone.appendChild(el("code", null, esc(cmd)));
-      clone.appendChild(el("span", "clone__hint", "click to copy"));
-      copyBtn(clone, cmd);
-      card.appendChild(clone);
+      (p.installSteps || []).forEach(function (cmd) {
+        var clone = el("button", "clone card__install");
+        clone.type = "button";
+        clone.appendChild(el("code", null, esc(cmd)));
+        clone.appendChild(el("span", "clone__hint", "click to copy"));
+        copyBtn(clone, cmd);
+        card.appendChild(clone);
+      });
       clickableCard(card, p.name);
     }
     return card;
@@ -336,18 +341,32 @@
     return card;
   }
 
-  function renderGrid(id, items, builder, empty) {
-    var grid = document.getElementById(id);
-    if (!grid) return;
+  /* renders items grouped under their `theme` headings */
+  function renderGroups(id, items, builder, empty) {
+    var root = document.getElementById(id);
+    if (!root) return;
     if (!items || !items.length) {
+      var grid0 = el("div", "grid");
       var e = el("div", "empty");
       e.appendChild(el("div", "empty__mark", empty.mark));
       e.appendChild(el("h3", null, empty.title));
       e.appendChild(el("p", null, empty.body));
-      grid.appendChild(e);
+      grid0.appendChild(e);
+      root.appendChild(grid0);
       return;
     }
-    items.forEach(function (it) { grid.appendChild(builder(it)); });
+    var order = [], groups = {};
+    items.forEach(function (it) {
+      var t = it.theme || "";
+      if (!groups[t]) { groups[t] = []; order.push(t); }
+      groups[t].push(it);
+    });
+    order.forEach(function (t) {
+      if (t) root.appendChild(el("p", "lp-group-label", esc(t)));
+      var grid = el("div", "grid groups__grid");
+      groups[t].forEach(function (it) { grid.appendChild(builder(it)); });
+      root.appendChild(grid);
+    });
   }
 
   function bySurface(surface) {
@@ -356,26 +375,26 @@
     });
   }
 
-  renderGrid("chat-skills-grid", bySurface("chat"), skillCard, {
+  renderGroups("chat-skills-grid", bySurface("chat"), skillCard, {
     mark: "/",
     title: "Skills, coming soon",
     body: "Skills for Claude chat will be listed here as they're built and shared."
   });
 
-  renderGrid("code-skills-grid", bySurface("code"), skillCard, {
+  renderGroups("code-skills-grid", bySurface("code"), skillCard, {
     mark: "/",
     title: "Skills, coming soon",
     body: "Individual skills will be listed here as they're built and shared."
   });
 
-  renderGrid("packs-grid", C.packs, packCard, {
+  renderGroups("plugins-grid", C.plugins, pluginCard, {
     mark: "⌁",
-    title: "The first packs are taking shape",
-    body: "Project packs will appear here as they're built and released. Each will install with one " +
-          "<code>/plugin</code> command."
+    title: "Plugins, coming soon",
+    body: "Recommended plugins will appear here — each installable with a couple of " +
+          "<code>/plugin</code> commands."
   });
 
-  renderGrid("projects-grid", C.projects, projectCard, {
+  renderGroups("projects-grid", C.projects, projectCard, {
     mark: "✦",
     title: "Projects, coming soon",
     body: "Things I'm building will be showcased here — each easy to explore, clone, or download."
@@ -403,7 +422,7 @@
     }
     qi.appendChild(qiCol("Chat skills", "chat.html", bySurface("chat"), "Coming soon."));
     qi.appendChild(qiCol("Code skills", "code.html", bySurface("code"), "Coming soon."));
-    qi.appendChild(qiCol("Packs", "code.html", C.packs || [], "The first packs are taking shape."));
+    qi.appendChild(qiCol("Plugins", "code.html", C.plugins || [], "Coming soon."));
     qi.appendChild(qiCol("Projects", "code.html", C.projects || [], "Coming soon."));
   }
 

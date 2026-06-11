@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>agr·hub — advancements in AI, available to everyone</title>
-<meta name="description" content="Ready-to-use AI assets for everyone: skills you upload to Claude chat in a few clicks, and a full launchpad, packs, and projects for people who build with Claude Code." />
+<meta name="description" content="Ready-to-use AI assets for everyone: skills you upload to Claude chat in a few clicks, and a full launchpad, plugins, and projects for people who build with Claude Code." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -37,7 +37,7 @@
         <div class="nav__menu">
           <a href="code.html#launchpad">Launchpad</a>
           <a href="code.html#skills">Skills</a>
-          <a href="code.html#packs">Packs</a>
+          <a href="code.html#plugins">Plugins</a>
           <a href="code.html#projects">Projects</a>
           <a href="docs.html">Docs</a>
         </div>
@@ -64,8 +64,8 @@
         in a terminal, there's a door here for you.
       </p>
       <div class="hero__cta reveal">
-        <a class="btn btn--primary" href="chat.html">I use Claude chat →</a>
-        <a class="btn btn--ghost" href="code.html">I build with Claude Code →</a>
+        <a class="btn btn--hero" href="chat.html"><span class="btn__ico" aria-hidden="true">💬</span> I use Claude chat →</a>
+        <a class="btn btn--hero" href="code.html"><span class="btn__ico" aria-hidden="true">⌨️</span> I build with Claude Code →</a>
       </div>
     </div>
     <div class="meander" aria-hidden="true"></div>
@@ -99,8 +99,8 @@
           <h3 class="door__name">Code</h3>
           <p class="door__for">For builders — Claude Code &amp; the terminal</p>
           <p class="door__desc">
-            The agr-launchpad starter kit, individual skills, project packs, and full projects —
-            every asset downloadable, with links to the repos and people behind it.
+            The agr-launchpad starter kit, individual skills, hand-picked plugins, and full
+            projects — every asset downloadable, with links to the repos and people behind it.
           </p>
           <span class="door__cta">Explore Code assets →</span>
         </a>
@@ -134,8 +134,8 @@
         </article>
         <article class="card">
           <span class="card__marker">Asset type</span>
-          <h3 class="card__name">Pack</h3>
-          <p class="card__desc">A project-specific bundle of skills, agents, and tools for Claude Code — installed with one <code>/plugin</code> command on top of the launchpad.</p>
+          <h3 class="card__name">Plugin</h3>
+          <p class="card__desc">A bundle of skills, agents, and tools for Claude Code — installed from your terminal with a couple of <code>/plugin</code> commands.</p>
         </article>
         <article class="card">
           <span class="card__marker">Asset type</span>
@@ -143,14 +143,44 @@
           <p class="card__desc">A complete thing I've built, showcased with screenshots and guides — yours to download, clone, and make your own.</p>
         </article>
       </div>
-      <div class="lp-note how__note">
-        <p>
-          <strong>Where to start with downloads.</strong> Every pop-out tile has its own
-          <strong>Download ZIP</strong> button. If you've never installed a skill before, the
-          <strong>“Start here”</strong> card on the Chat page walks you through it click by click —
-          installing, removing, creating, and changing skills.
+    </div>
+  </section>
+
+  <!-- GET STARTED -->
+  <section class="section starts" id="get-started">
+    <div class="section__in">
+      <header class="section__head">
+        <p class="kicker"><span class="kicker__bar"></span>First time here?</p>
+        <h2 class="h2">How to get started</h2>
+        <p class="lead">
+          Every pop-out tile has its own <strong>Download ZIP</strong> button — and each side of the
+          hub has a step-by-step guide that takes you from zero to your first asset.
         </p>
-        <a class="btn btn--primary lp-deepdive" href="chat.html#asset=how-to-use-skills">Open the how-to guide →</a>
+      </header>
+      <div class="doors">
+        <div class="door door--start">
+          <span class="door__icon" aria-hidden="true">💬</span>
+          <h3 class="door__name">Get started with Chat</h3>
+          <p class="door__desc">
+            Never installed a skill? The guide walks you through it click by click — installing,
+            removing, creating, and changing skills on claude.ai. No coding, just a file upload.
+          </p>
+          <div class="door__actions">
+            <a class="btn btn--primary btn--sm" href="chat.html#asset=how-to-use-skills">Open the Chat guide →</a>
+          </div>
+        </div>
+        <div class="door door--start">
+          <span class="door__icon" aria-hidden="true">⌨️</span>
+          <h3 class="door__name">Get started with Code</h3>
+          <p class="door__desc">
+            Equip Claude Code from your terminal in minutes — official marketplace, community
+            marketplaces, and npm tools. Or clone the launchpad and skip straight to building.
+          </p>
+          <div class="door__actions">
+            <a class="btn btn--primary btn--sm" href="code.html#asset=how-to-install-plugins">Open the Code guide →</a>
+            <a class="btn btn--line btn--sm" href="code.html#launchpad">Start from the launchpad</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -212,7 +242,7 @@
   <p class="foot__copy">© <span id="year"></span> Nicolas Agrotis</p>
 </footer>
 
-<script src="data/catalog.js"></script>
-<script src="assets/app.js"></script>
+<script src="data/catalog.js?v=3"></script>
+<script src="assets/app.js?v=3"></script>
 </body>
 </html>

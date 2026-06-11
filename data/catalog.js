@@ -1,13 +1,14 @@
 /*
  * agr-hub catalog — the single source of truth for the website.
  *
- * Every asset (skill / pack / project) is one object. The pages render from
+ * Every asset (skill / plugin / project) is one object. The pages render from
  * these arrays; the pop-out detail tile renders the what/why/worksWith/example
  * fields. No build step: edit, commit, push — GitHub Pages updates the site.
  *
  * Shared asset fields:
  *   name         unique id, also used in deep links (#asset=<name>)
  *   marker       small category label on the card
+ *   theme        thematic group — cards render grouped under these headings
  *   surfaces     where it appears: ["chat"], ["code"], or ["chat","code"]
  *   author       { name, url?, self: true|false }  -> "by Nicolas" tag vs third-party tag
  *   origin       { label, url }  -> credit to the repo/person it was first conceived in
@@ -19,6 +20,7 @@
  *   zipUrl       direct download (per-skill ZIPs are hosted on this site, see
  *                downloads/skills/ — built with `make skill-zips`)
  *   url          deep link to the source (SKILL.md or repo)
+ *   installSteps (plugins) terminal/Claude-Code commands, run in order
  *
  * Skills with surfaces ["chat","code"] appear on both pages.
  * visibility: "private" shows an "in development" badge with no actions.
@@ -47,8 +49,10 @@ window.AGR_CATALOG = {
   skills: [
     {
       name: "how-to-use-skills",
+      title: "How to use skills",
       type: "guide",
       marker: "Start here",
+      theme: "Getting started",
       surfaces: ["chat"],
       author: { name: "Nicolas Agrotis", self: true },
       description:
@@ -105,8 +109,72 @@ window.AGR_CATALOG = {
       url: "https://github.com/anthropics/skills",
     },
     {
+      name: "how-to-install-plugins",
+      title: "How to install plugins",
+      type: "guide",
+      marker: "Start here",
+      theme: "Getting started",
+      surfaces: ["code"],
+      author: { name: "Nicolas Agrotis", self: true },
+      description:
+        "Install any plugin from your terminal in under a minute — official marketplace, community marketplaces, and npm tools, step by step.",
+      what:
+        "Plugins extend Claude Code with skills, agents, and tools. This guide shows the three ways they install — all from your terminal — and how to remove them again.",
+      why:
+        "Every plugin tile on this page shows its install commands. Read this once and those commands will make sense forever — or skip it all by starting from the launchpad, which ships with the whole set pre-wired.",
+      worksWith: [
+        { name: "agr-launchpad", note: "The shortcut: clone it and every plugin below is already configured." },
+      ],
+      guideSections: [
+        {
+          title: "Before you start",
+          steps: [
+            "Install Claude Code if you haven't: npm install -g @anthropic-ai/claude-code",
+            "Open a terminal in your project folder and run: claude",
+            "Everything below is typed inside Claude Code at the prompt.",
+          ],
+        },
+        {
+          title: "Install from the official marketplace",
+          steps: [
+            "Anthropic's marketplace is built in — one command installs a plugin:",
+            "/plugin install superpowers@claude-plugins-official",
+            "Same pattern for the rest: /plugin install skill-creator@claude-plugins-official, /plugin install frontend-design@claude-plugins-official",
+            "Restart Claude Code when prompted; the plugin's commands and skills are now available.",
+          ],
+        },
+        {
+          title: "Install from a community marketplace",
+          steps: [
+            "Some plugins live in their author's own marketplace. Add the marketplace first:",
+            "/plugin marketplace add mksglu/context-mode",
+            "Then install from it: /plugin install context-mode@context-mode",
+            "Same two-step pattern for claude-mem: /plugin marketplace add thedotmack/claude-mem, then /plugin install claude-mem",
+          ],
+        },
+        {
+          title: "Install npm-based tools",
+          steps: [
+            "A few tools install with npx instead of /plugin — get-shit-done is one:",
+            "npx get-shit-done-cc --claude --global   (run this in your terminal, not inside Claude Code)",
+            "Its /gsd-* commands appear in Claude Code right away.",
+          ],
+        },
+        {
+          title: "Remove a plugin",
+          steps: [
+            "/plugin uninstall <name> removes a plugin.",
+            "/plugin marketplace remove <name> removes a marketplace you no longer use.",
+          ],
+        },
+      ],
+      origin: { label: "anthropics/claude-plugins-official", url: "https://github.com/anthropics/claude-plugins-official" },
+      url: "https://github.com/anthropics/claude-plugins-official",
+    },
+    {
       name: "grill-me",
       marker: "Workflow",
+      theme: "Think & plan",
       surfaces: ["chat", "code"],
       author: { name: "Nicolas Agrotis", self: true },
       description: "Interviews you relentlessly about a plan or design until every decision is resolved.",
@@ -115,8 +183,8 @@ window.AGR_CATALOG = {
       why:
         "Most plans fail because of the questions nobody asked. grill-me surfaces the gaps, contradictions, and “I hadn't thought of that” moments before you invest time and money — not after.",
       worksWith: [
-        { name: "html", note: "Grill your idea first, then have the html skill build the page." },
-        { name: "dashboard-builder", note: "Agree on what questions a dashboard must answer before building it." },
+        { name: "caveman", note: "Get grilled in caveman mode — fast questions, faster answers." },
+        { name: "superpowers", note: "Grill the plan, then let superpowers discipline the build." },
       ],
       example:
         "Try saying: “Grill me about my plan to launch a small online bakery.” Claude will interview you about pricing, suppliers, delivery, your busiest hours… until the plan holds water.",
@@ -127,135 +195,174 @@ window.AGR_CATALOG = {
       zipUrl: "downloads/skills/grill-me.zip",
     },
     {
-      name: "coding-standards",
-      marker: "Foundation",
+      name: "caveman",
+      marker: "Style",
+      theme: "Style & voice",
       surfaces: ["chat", "code"],
-      author: { name: "Nicolas Agrotis", self: true },
-      description: "Baseline conventions for clean, readable, consistent code.",
+      author: { name: "Julius Brussee", url: "https://github.com/JuliusBrussee", self: false },
+      origin: { label: "JuliusBrussee/caveman", url: "https://github.com/JuliusBrussee/caveman" },
+      description: "Makes Claude answer terse, like a smart caveman — same substance, ~75% fewer words.",
       what:
-        "A rulebook of good coding habits that Claude reads before writing any code — how to name things, structure files, and keep code readable.",
+        "A style skill that switches Claude into ultra-compressed “caveman speak”: no filler, no pleasantries, fragments welcome. The technical substance — code, names, errors — stays exact. Only the fluff dies.",
       why:
-        "Without it, every script Claude writes looks a little different. With it, everything comes back clean and consistent — as if one careful engineer wrote it all.",
+        "Long answers cost reading time (and, in Claude Code, tokens). caveman keeps everything that matters and cuts the rest — with intensity levels from “lite” to “ultra” depending on how terse you want it.",
       worksWith: [
-        { name: "error-handling", note: "The natural pair: one keeps code tidy, the other keeps it robust." },
-        { name: "code-tour", note: "Consistent code makes guided walkthroughs much easier to follow." },
+        { name: "grill-me", note: "An interview in caveman mode is remarkably efficient." },
       ],
       example:
-        "Try saying: “Write a Python script that renames my photo files by the date they were taken.” The code that comes back follows the standards automatically — you don't have to ask.",
-      home: "agr-launchpad",
-      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/coding-standards/SKILL.md",
-      zipUrl: "downloads/skills/coding-standards.zip",
-    },
-    {
-      name: "error-handling",
-      marker: "Foundation",
-      surfaces: ["chat", "code"],
-      author: { name: "Nicolas Agrotis", self: true },
-      description: "Patterns for handling failures properly instead of hiding them.",
-      what:
-        "Teaches Claude how to write code that deals with things going wrong — a missing file, a broken link, a server that doesn't answer — instead of crashing or pretending nothing happened.",
-      why:
-        "The difference between a script that works on your machine once and a tool you can rely on is what happens when something fails. This skill builds that in from the start.",
-      worksWith: [
-        { name: "coding-standards", note: "Clean AND robust — use them together for anything you'll reuse." },
-      ],
-      example:
-        "Try saying: “Write a script that downloads the files from this list of links.” With this skill, a dead link gets logged and skipped — the other downloads still finish.",
-      home: "agr-launchpad",
-      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/error-handling/SKILL.md",
-      zipUrl: "downloads/skills/error-handling.zip",
-    },
-    {
-      name: "html",
-      marker: "Craft",
-      surfaces: ["chat", "code"],
-      author: { name: "Nicolas Agrotis", self: true },
-      description: "Produces polished, single-file HTML pages with real design.",
-      what:
-        "Makes Claude produce complete, polished web pages as a single file — reports, invitations, dashboards, mini-sites — that open with a double-click. No tools to install, nothing to set up.",
-      why:
-        "Anything Claude writes for you becomes instantly shareable: send the file to anyone and it just opens in their browser, looking designed rather than generated.",
-      worksWith: [
-        { name: "grill-me", note: "Pin down what the page must say before it gets built." },
-        { name: "dashboard-builder", note: "When the page is mostly charts and numbers, reach for this one." },
-      ],
-      example:
-        "Try saying: “Make me a one-page website for my dog-walking service, with prices and a contact section.” You get one file you can open, share, or host anywhere.",
-      home: "agr-launchpad",
-      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/html/SKILL.md",
-      zipUrl: "downloads/skills/html.zip",
-    },
-    {
-      name: "dashboard-builder",
-      marker: "Craft",
-      surfaces: ["chat", "code"],
-      author: { name: "Nicolas Agrotis", self: true },
-      description: "Spins up quick, local dashboards from your data.",
-      what:
-        "Turns your data — a spreadsheet, an export, a list of numbers — into an interactive dashboard page you can open in your browser and explore.",
-      why:
-        "It's built around a simple idea: a good dashboard answers real questions (“are sales up?”, “where do we lose customers?”), not just decorates numbers with charts.",
-      worksWith: [
-        { name: "html", note: "Same single-file output — use html for pages, this for data views." },
-        { name: "grill-me", note: "Let it grill you about which questions the dashboard must answer." },
-      ],
-      example:
-        "Try saying: “Here's my sales spreadsheet — build a dashboard showing revenue by month and my top five products.” You get an interactive page, not a wall of numbers.",
-      home: "agr-launchpad",
-      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/dashboard-builder/SKILL.md",
-      zipUrl: "downloads/skills/dashboard-builder.zip",
-    },
-    {
-      name: "code-tour",
-      marker: "Foundation",
-      surfaces: ["chat", "code"],
-      author: { name: "Nicolas Agrotis", self: true },
-      description: "Walks you through an unfamiliar codebase, section by section.",
-      what:
-        "Creates guided, step-by-step walkthroughs of a codebase — like a museum audio guide, but for code. Each stop explains one part, in order, pitched at whoever the tour is for.",
-      why:
-        "Joining a project — or returning to your own after six months — usually means hours of confused reading. A tour turns that into a sequence of short, explained stops.",
-      worksWith: [
-        { name: "coding-standards", note: "Consistent code is far easier to tour." },
-      ],
-      example:
-        "Try saying: “Create a tour of this project for someone who has never seen it before.” Then follow the stops one by one.",
+        "Try saying: “caveman mode”, then ask anything. Instead of three polite paragraphs you get: “Bug line 12. Variable null. Fix: check before use.” Say “normal mode” to switch back.",
       exampleCode:
-        "In Claude Code: /code-tour produces .tour files that VS Code's CodeTour extension plays back inside the editor.",
-      home: "agr-launchpad",
-      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/code-tour/SKILL.md",
-      zipUrl: "downloads/skills/code-tour.zip",
-    },
-    {
-      name: "skill-stocktake",
-      marker: "Meta",
-      surfaces: ["chat", "code"],
-      author: { name: "Nicolas Agrotis", self: true },
-      description: "Audits your installed skills and flags gaps or drift.",
-      what:
-        "A skill that reviews your other skills. It checks each one for quality — is it clear, is it current, does it overlap with another? — and reports what to fix, merge, or retire.",
-      why:
-        "Skills pile up. After a while some go stale, some contradict each other, and some were never quite right. A stocktake keeps your collection sharp instead of cluttered.",
-      worksWith: [
-        { name: "how-to-use-skills", note: "After a stocktake, use the guide to remove or update what it flagged." },
-      ],
-      example:
-        "Try saying: “Run a stocktake of my skills.” You get a quality report per skill, with concrete suggestions.",
-      home: "agr-launchpad",
-      url: "https://github.com/agrotisnicolaos/agr-launchpad/blob/main/.claude/skills/skill-stocktake/SKILL.md",
-      zipUrl: "downloads/skills/skill-stocktake.zip",
+        "In Claude Code: /caveman lite|full|ultra sets the intensity.",
+      url: "https://github.com/JuliusBrussee/caveman/blob/main/skills/caveman/SKILL.md",
+      zipUrl: "downloads/skills/caveman.zip",
     },
   ],
 
-  // Project-specific packs (skills/agents/tools) installed via /plugin.
-  // Same asset fields as skills, plus: visibility, install, repoUrl.
-  packs: [],
+  // Plugins for Claude Code — installed from a marketplace or npm.
+  // installSteps run in order; multi-step installs add a marketplace first.
+  plugins: [
+    {
+      name: "superpowers",
+      marker: "Workflow engine",
+      theme: "Workflow & discipline",
+      surfaces: ["code"],
+      author: { name: "Jesse Vincent", url: "https://github.com/obra", self: false },
+      origin: { label: "obra/superpowers", url: "https://github.com/obra/superpowers" },
+      description: "Disciplined engineering workflows — brainstorm, plan, test first, debug methodically, verify before “done.”",
+      what:
+        "A plugin that gives Claude Code a senior engineer's discipline: it brainstorms before building, writes a plan, tests first, debugs scientifically, and verifies before claiming anything works.",
+      why:
+        "The difference between “code that ran once” and engineering. Claude stops cutting corners — every feature goes through the same rigorous arc, automatically.",
+      worksWith: [
+        { name: "get-shit-done", note: "GSD structures the project; superpowers disciplines each build step." },
+        { name: "grill-me", note: "Grill the idea first, then hand it to a disciplined builder." },
+      ],
+      example:
+        "Say “build me a habit tracker” and instead of dumping code, it opens with questions about what you actually need — then plans, tests, and builds.",
+      visibility: "public",
+      installSteps: ["/plugin install superpowers@claude-plugins-official"],
+      repoUrl: "https://github.com/obra/superpowers",
+    },
+    {
+      name: "get-shit-done",
+      marker: "Project system",
+      theme: "Workflow & discipline",
+      surfaces: ["code"],
+      author: { name: "TÂCHES", url: "https://github.com/gsd-build", self: false },
+      origin: { label: "gsd-build/get-shit-done", url: "https://github.com/gsd-build/get-shit-done" },
+      description: "A meta-prompting, spec-driven development system that fights context rot on long projects.",
+      what:
+        "A project operating system for Claude Code: roadmap → phases → plans → execution, with atomic commits and verification at every step. Built to keep quality high as projects grow beyond a single session.",
+      why:
+        "Long projects degrade as the AI's context fills up. GSD breaks work into small, planned, verifiable phases — so the hundredth task gets executed as carefully as the first.",
+      worksWith: [
+        { name: "superpowers", note: "The two complement each other: GSD plans the war, superpowers fights each battle." },
+      ],
+      example:
+        "Run /gsd-new-project and answer its questions — you get a roadmap. /gsd-plan-phase and /gsd-execute-phase then carry each phase from plan to verified, committed code.",
+      visibility: "public",
+      installSteps: ["npx get-shit-done-cc --claude --global"],
+      repoUrl: "https://github.com/gsd-build/get-shit-done",
+    },
+    {
+      name: "skill-creator",
+      marker: "Authoring",
+      theme: "Authoring & skills",
+      surfaces: ["code"],
+      author: { name: "Anthropic", url: "https://github.com/anthropics", self: false },
+      origin: { label: "anthropics/skills", url: "https://github.com/anthropics/skills" },
+      description: "Mint your own skills — it scaffolds, writes, and tests a reusable skill from any task you repeat.",
+      what:
+        "Anthropic's official skill for making skills. Describe a task you do repeatedly; it interviews you, then scaffolds and tests a skill so Claude does that task your way, every time.",
+      why:
+        "Skills are how you teach Claude permanently. This turns creating them into a conversation instead of a documentation exercise.",
+      worksWith: [
+        { name: "how-to-use-skills", note: "The Chat guide shows how to upload what you create to claude.ai." },
+        { name: "superpowers", note: "Its workflows call your minted skills at the right moments." },
+      ],
+      example:
+        "Say “help me create a skill that formats my meeting notes the way I like” — answer its questions, get a ready-to-use skill.",
+      visibility: "public",
+      installSteps: ["/plugin install skill-creator@claude-plugins-official"],
+      repoUrl: "https://github.com/anthropics/skills",
+    },
+    {
+      name: "frontend-design",
+      marker: "Interface",
+      theme: "Design & interface",
+      surfaces: ["code"],
+      author: { name: "Anthropic", url: "https://github.com/anthropics", self: false },
+      origin: { label: "anthropics/claude-plugins-official", url: "https://github.com/anthropics/claude-plugins-official" },
+      description: "Distinctive, production-grade UI that escapes the generic “AI look.”",
+      what:
+        "A design-focused plugin that pushes Claude beyond default-looking interfaces: real typography, deliberate color, distinctive layouts — so what you ship actually looks designed.",
+      why:
+        "AI-generated frontends tend to look the same. This one breaks the mold — the difference between “generated” and “designed” is immediately visible.",
+      worksWith: [
+        { name: "superpowers", note: "Disciplined process + designed output." },
+      ],
+      example:
+        "Ask for “a landing page for my coffee subscription” with and without it — you'll see the difference in the first second.",
+      visibility: "public",
+      installSteps: ["/plugin install frontend-design@claude-plugins-official"],
+      repoUrl: "https://github.com/anthropics/claude-plugins-official",
+    },
+    {
+      name: "context-mode",
+      marker: "Focus",
+      theme: "Memory & focus",
+      surfaces: ["code"],
+      author: { name: "Mert Köseoğlu", url: "https://github.com/mksglu", self: false },
+      origin: { label: "mksglu/context-mode", url: "https://github.com/mksglu/context-mode" },
+      description: "Keeps large tool output out of the conversation, so Claude stays fast and sharp through long sessions.",
+      what:
+        "A focus plugin: big command outputs, logs, and pages get processed in a sandbox, and only the distilled answer enters the conversation. Claude's working memory stays clean.",
+      why:
+        "Claude's context window is its attention span. Protecting it means longer sessions, lower cost, and noticeably sharper answers late into the day.",
+      worksWith: [
+        { name: "claude-mem", note: "One protects the present session; the other preserves the past ones." },
+      ],
+      example:
+        "Ask Claude to analyze a huge log file — instead of pulling thousands of lines into its memory, it comes back with just the errors that matter.",
+      visibility: "public",
+      installSteps: [
+        "/plugin marketplace add mksglu/context-mode",
+        "/plugin install context-mode@context-mode",
+      ],
+      repoUrl: "https://github.com/mksglu/context-mode",
+    },
+    {
+      name: "claude-mem",
+      marker: "Memory",
+      theme: "Memory & focus",
+      surfaces: ["code"],
+      author: { name: "Alex Newman", url: "https://github.com/thedotmack", self: false },
+      origin: { label: "thedotmack/claude-mem", url: "https://github.com/thedotmack/claude-mem" },
+      description: "Persistent memory across sessions — Claude remembers your project, so you never re-explain it.",
+      what:
+        "A memory plugin that captures what happened in every session — decisions, fixes, discoveries — and brings the relevant parts back the next time you open the project.",
+      why:
+        "Without memory, every session starts from zero. With it, Claude picks up where you left off — “did we already solve this?” finally has an answer.",
+      worksWith: [
+        { name: "context-mode", note: "Memory for the long term, focus for the session — they pair naturally." },
+      ],
+      example:
+        "Close your laptop mid-feature. Tomorrow, ask “where were we?” — and get a real answer, including the decisions you made and why.",
+      visibility: "public",
+      installSteps: [
+        "/plugin marketplace add thedotmack/claude-mem",
+        "/plugin install claude-mem",
+      ],
+      repoUrl: "https://github.com/thedotmack/claude-mem",
+    },
+  ],
 
   // Standalone projects — GitHub repos with their own purpose.
   projects: [
     {
       name: "agr-informed",
       marker: "AI automation",
+      theme: "Automations",
       surfaces: ["code"],
       author: { name: "Nicolas Agrotis", self: true },
       description:
